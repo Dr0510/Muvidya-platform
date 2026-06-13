@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id        String     @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  role      String?
+  source    String?    @default("website")
+  status    String     @default("NEW")
+  notes     String?
+  metadata  Json?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  demoRequests      DemoRequest[]
+  workshopRequests  WorkshopRequest[]
+  enquiries         Enquiry[]
+}
+
+model DemoRequest {
+  id            String   @id @default(cuid())
+  leadId        String
+  lead          Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  preferredDate DateTime?
+  preferredTime String?
+  schoolName    String?
+  city          String?
+  state         String?
+  gradeLevel    String?
+  subjectArea   String?
+  studentCount  Int?
+  message       String?
+  status        String   @default("DEMO")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model WorkshopRequest {
+  id            String   @id @default(cuid())
+  leadId        String
+  lead          Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  workshopType  String?
+  preferredDate DateTime?
+  duration      String?
+  studentCount  Int?
+  gradeLevel    String?
+  schoolName    String?
+  city          String?
+  state         String?
+  message       String?
+  status        String   @default("WORKSHOP")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Enquiry {
+  id        String   @id @default(cuid())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  subject   String
+  message   String
+  status    String   @default("ENQUIRY")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id             String   @id @default(cuid())
+  name           String
+  slug           String   @unique
+  description    String
+  shortDesc      String?
+  category       String?
+  price          Decimal? @db.Decimal(10, 2)
+  comparePrice   Decimal? @db.Decimal(10, 2)
+  images         String[]
+  brochureUrl    String?
+  features       Json?
+  specifications Json?
+  inStock        Boolean  @default(true)
+  isFeatured     Boolean  @default(false)
+  tags           String[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Workshop {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String
+  shortDesc   String?
+  category    String?
+  duration    String?
+  price       Decimal? @db.Decimal(10, 2)
+  maxStudents Int?
+  image       String?
+  brochureUrl String?
+  curriculum  Json?
+  isActive    Boolean  @default(true)
+  tags        String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BlogPost {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String    @unique
+  excerpt     String?
+  content     String
+  coverImage  String?
+  author      String?
+  tags        String[]
+  isPublished Boolean   @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model NewsletterSubscriber {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  isActive       Boolean   @default(true)
+  subscribedAt   DateTime  @default(now())
+  unsubscribedAt DateTime?
+}

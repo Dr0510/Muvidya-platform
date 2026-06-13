@@ -1,6 +1,3 @@
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
 import { HeroSection } from "@/components/sections/hero-section";
 import { TrustSection } from "@/components/sections/trust-section";
 import { ProductShowcase } from "@/components/sections/product-showcase";
@@ -17,23 +14,18 @@ import { NewsletterSection } from "@/components/sections/newsletter-section";
 export default function HomePage() {
   return (
     <>
-      <Navbar />
-      <main className="min-h-screen">
-        <HeroSection />
-        <TrustSection />
-        <ProductShowcase />
-        <LearningOutcomes />
-        <ProjectShowcase />
-        <SchoolBenefits />
-        <StudentBenefits />
-        <Testimonials />
-        <ContactSection />
-        <FAQSection />
-        <CTASection />
-        <NewsletterSection />
-      </main>
-      <Footer />
-      <FloatingWhatsApp />
+      <HeroSection />
+      <TrustSection />
+      <ProductShowcase />
+      <LearningOutcomes />
+      <ProjectShowcase />
+      <SchoolBenefits />
+      <StudentBenefits />
+      <Testimonials />
+      <ContactSection />
+      <FAQSection />
+      <CTASection />
+      <NewsletterSection />
     </>
   );
 }

@@ -1,0 +1,320 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { SectionWrapper } from "@/components/shared/section-wrapper";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ProductCard } from "@/components/products/product-card";
+import { PRODUCT_CATEGORIES } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+import {
+  CheckCircle2,
+  Download,
+  ArrowRight,
+  Sparkles,
+  FileText,
+  Shield,
+  Truck,
+  HeadphonesIcon,
+} from "lucide-react";
+
+interface Product {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  shortDesc: string | null;
+  category: string | null;
+  price: number | null;
+  comparePrice: number | null;
+  images: string[];
+  features: any;
+  specifications: any;
+  brochureUrl: string | null;
+  inStock: boolean;
+  isFeatured: boolean;
+  tags: string[];
+}
+
+interface ProductDetailClientProps {
+  product: Product;
+  relatedProducts: Product[];
+}
+
+const perks = [
+  {
+    icon: Shield,
+    title: "1 Year Warranty",
+    description: "Against manufacturing defects",
+  },
+  {
+    icon: Truck,
+    title: "Free Shipping",
+    description: "On orders above ₹2,000",
+  },
+  {
+    icon: HeadphonesIcon,
+    title: "Dedicated Support",
+    description: "Email, phone & WhatsApp",
+  },
+];
+
+export function ProductDetailClient({
+  product,
+  relatedProducts,
+}: ProductDetailClientProps) {
+  const [activeTab, setActiveTab] = useState<"features" | "specs">("features");
+
+  const category = PRODUCT_CATEGORIES.find((c) => c.value === product.category);
+  const gradient = category?.color || "from-primary-500 to-accent-500";
+
+  const features = Array.isArray(product.features)
+    ? (product.features as string[])
+    : [];
+
+  const specs = product.specifications
+    ? (typeof product.specifications === "object"
+        ? Object.entries(product.specifications as Record<string, string>)
+        : [])
+    : [];
+
+  return (
+    <>
+      {/* Product Detail */}
+      <SectionWrapper className="pt-12 pb-16 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Image / Hero */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div
+                className={cn(
+                  "relative h-80 lg:h-96 rounded-2xl bg-gradient-to-br p-8 flex items-center justify-center overflow-hidden",
+                  gradient
+                )}
+              >
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_0%,transparent_70%)]" />
+                <div className="relative text-center">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-4">
+                    <Sparkles className="h-4 w-4" />
+                    {category?.label || "Product"}
+                  </div>
+                  <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">
+                    {product.name}
+                  </h1>
+                  {product.shortDesc && (
+                    <p className="text-white/80 text-lg max-w-md mx-auto">
+                      {product.shortDesc}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Brochure Download */}
+              {product.brochureUrl && (
+                <a
+                  href={product.brochureUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors w-full justify-center"
+                >
+                  <Download className="h-4 w-4" />
+                  Download Brochure
+                </a>
+              )}
+            </motion.div>
+
+            {/* Details */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="space-y-6"
+            >
+              <div>
+                <p className="text-gray-600 leading-relaxed">
+                  {product.description}
+                </p>
+              </div>
+
+              {/* Tags */}
+              {product.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {product.tags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      variant="secondary"
+                      className="bg-gray-50 text-gray-600 border-gray-200"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              )}
+
+              {/* Stock Status */}
+              <div className="flex items-center gap-2">
+                <div
+                  className={cn(
+                    "h-2.5 w-2.5 rounded-full",
+                    product.inStock ? "bg-green-500" : "bg-red-500"
+                  )}
+                />
+                <span className="text-sm font-medium text-gray-700">
+                  {product.inStock ? "In Stock" : "Out of Stock"}
+                </span>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <Link href="/contact">
+                  <Button
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30"
+                  >
+                    Request a Demo
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button variant="outline" size="lg" className="w-full">
+                    <FileText className="mr-2 h-4 w-4" />
+                    Enquire Now
+                  </Button>
+                </Link>
+              </div>
+
+              {/* Perks */}
+              <div className="grid grid-cols-3 gap-3 pt-4">
+                {perks.map((perk) => {
+                  const Icon = perk.icon;
+                  return (
+                    <div
+                      key={perk.title}
+                      className="text-center p-3 rounded-xl bg-gray-50 border border-gray-100"
+                    >
+                      <Icon className="h-5 w-5 text-primary-500 mx-auto mb-1" />
+                      <p className="text-xs font-semibold text-gray-900">
+                        {perk.title}
+                      </p>
+                      <p className="text-[10px] text-gray-500 mt-0.5">
+                        {perk.description}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Tabs */}
+          {(features.length > 0 || specs.length > 0) && (
+            <div className="mt-16">
+              <div className="flex gap-1 border-b border-gray-200">
+                {features.length > 0 && (
+                  <button
+                    onClick={() => setActiveTab("features")}
+                    className={cn(
+                      "px-6 py-3 text-sm font-medium transition-colors relative",
+                      activeTab === "features"
+                        ? "text-primary-600"
+                        : "text-gray-500 hover:text-gray-700"
+                    )}
+                  >
+                    Features
+                    {activeTab === "features" && (
+                      <motion.div
+                        layoutId="tab-indicator"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500"
+                      />
+                    )}
+                  </button>
+                )}
+                {specs.length > 0 && (
+                  <button
+                    onClick={() => setActiveTab("specs")}
+                    className={cn(
+                      "px-6 py-3 text-sm font-medium transition-colors relative",
+                      activeTab === "specs"
+                        ? "text-primary-600"
+                        : "text-gray-500 hover:text-gray-700"
+                    )}
+                  >
+                    Specifications
+                    {activeTab === "specs" && (
+                      <motion.div
+                        layoutId="tab-indicator"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500"
+                      />
+                    )}
+                  </button>
+                )}
+              </div>
+
+              <div className="mt-6">
+                {activeTab === "features" && features.length > 0 && (
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {features.map((feature) => (
+                      <div
+                        key={feature}
+                        className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100"
+                      >
+                        <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0" />
+                        <span className="text-sm text-gray-700">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {activeTab === "specs" && specs.length > 0 && (
+                  <div className="border border-gray-200 rounded-xl overflow-hidden">
+                    {specs.map(([key, value], idx) => (
+                      <div
+                        key={key}
+                        className={cn(
+                          "flex items-center justify-between px-6 py-3 text-sm",
+                          idx % 2 === 0 ? "bg-gray-50" : "bg-white"
+                        )}
+                      >
+                        <span className="font-medium text-gray-900 capitalize">
+                          {key.replace(/_/g, " ")}
+                        </span>
+                        <span className="text-gray-600">{value}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </SectionWrapper>
+
+      {/* Related Products */}
+      {relatedProducts.length > 0 && (
+        <SectionWrapper className="py-16 bg-gray-50/50">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10">
+              <h2 className="text-2xl font-bold text-gray-900">
+                Related Products
+              </h2>
+              <p className="text-sm text-gray-500 mt-1">
+                Explore more products in this category
+              </p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {relatedProducts.map((p, i) => (
+                <ProductCard key={p.id} product={p} index={i} />
+              ))}
+            </div>
+          </div>
+        </SectionWrapper>
+      )}
+    </>
+  );
+}
