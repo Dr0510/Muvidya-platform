@@ -1,38 +1,44 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Play, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { AnimatedSection } from "@/components/shared/section-wrapper";
+import { STATS } from "@/lib/constants";
 
 export function HeroSection() {
   return (
-    <section className="relative flex min-h-[calc(100vh-5rem)] items-center overflow-hidden bg-gradient-to-br from-primary-950 via-primary-950 to-background">
-      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute -top-40 -right-32 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute -bottom-40 -left-32 h-80 w-80 rounded-full bg-accent/20 blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgb(99_102_241_/_0.04)_1px,transparent_1px),linear-gradient(90deg,rgb(99_102_241_/_0.04)_1px,transparent_1px)] bg-[size:64px_64px]" />
+    <section className="relative min-h-[calc(100vh-5rem)] flex items-center overflow-hidden bg-background">
+      {/* Background elements - theme aware */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/[0.06] to-background" />
+        <div className="absolute -top-40 -right-32 h-[500px] w-[500px] rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -bottom-40 -left-32 h-[400px] w-[400px] rounded-full bg-accent/8 blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgb(var(--color-primary)_/_0.04)_1px,transparent_1px),linear-gradient(90deg,rgb(var(--color-primary)_/_0.04)_1px,transparent_1px)] bg-[size:64px_64px]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 py-28 sm:px-6 md:py-36 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 py-20 md:py-28 lg:py-32">
+          {/* Left Column */}
           <div className="space-y-8">
             <AnimatedSection delay={100}>
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary-100 backdrop-blur-sm">
+              <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/12 px-4 py-2 text-sm font-semibold text-primary backdrop-blur-sm">
                 <Sparkles className="h-4 w-4" />
-                <span>India's Leading STEM Education Platform</span>
-              </div>
+                India's Leading STEM Education Platform
+              </span>
             </AnimatedSection>
 
             <AnimatedSection delay={200}>
-              <h1 className="max-w-4xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-                <span>Where Young Minds</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-foreground">
+                Where Young Minds
                 <br />
                 <span className="gradient-text">Build the Future</span>
               </h1>
             </AnimatedSection>
 
             <AnimatedSection delay={300}>
-              <p className="max-w-2xl text-base leading-relaxed text-slate-300 md:text-xl">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl">
                 Empower the next generation with hands-on STEM education.
                 Robotics kits, coding workshops, and innovative learning experiences
                 for schools and students across India.
@@ -40,60 +46,88 @@ export function HeroSection() {
             </AnimatedSection>
 
             <AnimatedSection delay={400}>
-              <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-primary-600 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-primary/20 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/25"
+                  className="group relative inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-8 py-4 text-base font-bold text-amber-950 shadow-lg shadow-amber-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-amber-500/35 hover:brightness-110 overflow-hidden"
                 >
-                  Book a Free Demo
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/25 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
+                  <span className="relative z-10 flex items-center gap-2">
+                    Book a Free Demo
+                    <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
+                  </span>
                 </Link>
                 <Link
                   href="/workshops"
-                  className="group inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-8 py-4 text-lg font-bold text-white backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-border/60 bg-surface-muted/50 px-8 py-4 text-base font-bold text-foreground backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-primary/5"
                 >
-                  <Play className="h-5 w-5" />
                   Explore Workshops
                 </Link>
               </div>
             </AnimatedSection>
 
             <AnimatedSection delay={500}>
-              <div className="grid grid-cols-3 gap-6 border-t border-white/10 pt-6">
-                <div>
-                  <p className="text-2xl font-bold text-white sm:text-3xl">500+</p>
-                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-400 sm:text-sm">Schools Partnered</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-white sm:text-3xl">50K+</p>
-                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-400 sm:text-sm">Students Impacted</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-white sm:text-3xl">200+</p>
-                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-400 sm:text-sm">Workshops Done</p>
-                </div>
+              <div className="grid grid-cols-3 gap-6 border-t border-border/40 pt-6">
+                {STATS.slice(0, 3).map((stat) => (
+                  <div key={stat.label}>
+                    <p className="text-2xl sm:text-3xl font-bold text-foreground">{stat.value}</p>
+                    <p className="mt-1 text-xs sm:text-sm font-medium uppercase tracking-wider text-muted-foreground">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
               </div>
             </AnimatedSection>
           </div>
 
+          {/* Right Column - Product Image Showcase */}
           <AnimatedSection delay={600} direction="scale" className="hidden lg:block">
             <div className="relative">
-              <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-primary to-accent blur-2xl opacity-20" />
-              <div className="relative rounded-[2rem] border border-white/10 bg-card/80 p-6 shadow-2xl shadow-primary/10 backdrop-blur-xl">
-                <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 p-6">
-                  <div className="flex h-full flex-col items-center justify-center text-center">
-                    <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-primary/20 px-4 py-2 text-sm font-semibold text-primary-100">
-                      <span className="h-2 w-2 rounded-full bg-green-400 animate-pulse" />
-                      N-Byte Explorer Kit
-                    </div>
-                    <div className="grid w-full grid-cols-2 gap-3">
-                      {["Robotics", "Coding", "AI/ML", "IoT"].map((item) => (
-                        <div key={item} className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-slate-200">
-                          {item}
-                        </div>
-                      ))}
-                    </div>
+              {/* Glow effect behind the image */}
+              <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-r from-primary via-accent to-primary opacity-20 blur-3xl animate-pulse-glow" />
+              
+              {/* Main product image card */}
+              <div className="relative rounded-[2rem] border border-border/40 bg-surface/50 p-4 shadow-2xl shadow-primary/10 backdrop-blur-xl">
+                <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gradient-to-br from-primary/10 to-accent/5">
+                  <Image
+                    src="/images/products/n-byte-explorer-kit.jpg"
+                    alt="N-Byte Explorer Kit"
+                    fill
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                    sizes="(max-width: 1024px) 50vw, 40vw"
+                    priority
+                  />
+                  {/* Gradient overlay for readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                  
+                  {/* Badge overlay */}
+                  <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur-sm px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
+                    <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
+                    N-Byte Explorer Kit
                   </div>
+
+                  {/* Feature tags at bottom */}
+                  <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
+                    {["Robotics", "Coding", "AI/ML", "IoT"].map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-lg bg-white/90 backdrop-blur-sm px-3 py-1.5 text-xs font-semibold text-gray-700 shadow-sm"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Floating secondary image */}
+                <div className="absolute -bottom-4 -right-4 w-28 h-28 rounded-xl overflow-hidden border-2 border-border/40 shadow-lg rotate-6 hover:rotate-0 transition-transform duration-300">
+                  <Image
+                    src="/images/products/n-byte-explorer-kit-2.jpg"
+                    alt="N-Byte Explorer Kit detail"
+                    fill
+                    className="object-cover"
+                    sizes="112px"
+                  />
                 </div>
               </div>
             </div>

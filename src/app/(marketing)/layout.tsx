@@ -10,7 +10,7 @@ export default function MarketingLayout({
   return (
     <div className="min-h-screen overflow-hidden bg-background text-foreground">
       <Navbar />
-      <main className="min-h-screen pt-16 md:pt-20">{children}</main>
+      <main className="min-h-screen pt-16 lg:pt-[72px]">{children}</main>
       <Footer />
       <FloatingWhatsApp />
     </div>

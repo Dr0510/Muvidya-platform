@@ -31,26 +31,26 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed top-0 left-0 z-40 h-screen bg-white border-r border-gray-200 transition-all duration-300",
+          "fixed top-0 left-0 z-40 h-screen bg-card border-r border-border transition-all duration-300",
           sidebarOpen ? "w-64" : "w-16"
         )}
       >
-        <div className="flex items-center justify-between h-16 px-4 border-b border-gray-100">
+        <div className="flex items-center justify-between h-16 px-4 border-b border-border/60">
           {sidebarOpen && (
             <Link href="/admin/dashboard" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
                 <Sparkles className="h-4 w-4 text-white" />
               </div>
-              <span className="font-bold text-gray-900">MuVidya</span>
+              <span className="font-bold text-foreground">MuVidya</span>
             </Link>
           )}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-500 transition-colors"
+            className="p-1.5 rounded-lg hover:bg-muted text-muted-foreground transition-colors"
           >
             <ChevronLeft className={cn("h-4 w-4 transition-transform", !sidebarOpen && "rotate-180")} />
           </button>
@@ -66,8 +66,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 className={cn(
                   "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
                   isActive
-                    ? "bg-primary-50 text-primary-700"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
                 title={!sidebarOpen ? item.label : undefined}
               >
@@ -82,18 +82,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Main Content */}
       <div className={cn("transition-all duration-300", sidebarOpen ? "ml-64" : "ml-16")}>
         {/* Top Bar */}
-        <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-xl border-b border-gray-100">
+        <header className="sticky top-0 z-30 bg-background/90 backdrop-blur-xl border-b border-border/60">
           <div className="flex items-center justify-between h-16 px-6">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 rounded-lg hover:bg-gray-100 text-gray-500"
+              className="p-2 rounded-lg hover:bg-muted text-muted-foreground"
             >
               <Menu className="h-5 w-5" />
             </button>
             <div className="flex items-center gap-4">
               <a
                 href="/"
-                className="text-sm text-gray-500 hover:text-primary-600 transition-colors"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 View Site
               </a>

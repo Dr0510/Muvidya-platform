@@ -17,32 +17,33 @@ const iconMap: Record<string, React.ComponentType<any>> = {
 
 export function LearningOutcomes() {
   return (
-    <SectionWrapper id="outcomes" className="bg-gradient-to-b from-white to-gray-50">
+    <SectionWrapper className="bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          title="Learning Outcomes"
-          subtitle="Developing future-ready skills through hands-on STEM education"
+          title="What Students Will Learn"
+          subtitle="Our curriculum builds essential 21st-century skills through hands-on project-based learning"
+          badge="Learning Outcomes"
         />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {LEARNING_OUTCOMES.map((outcome, index) => {
-            const Icon = iconMap[outcome.icon] || Icons.BrainCircuit;
+            const Icon = iconMap[outcome.icon] || Icons.Sparkles;
             return (
               <motion.div
                 key={outcome.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
-                whileHover={{ y: -5 }}
-                className="group relative p-6 rounded-2xl bg-white border border-gray-100 hover:border-primary-100 hover:shadow-lg hover:shadow-primary-500/5 transition-all duration-300"
+                transition={{ delay: index * 0.08, duration: 0.4 }}
+                className="group flex gap-4 rounded-2xl border border-border/70 bg-card p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-elevation-medium hover:border-primary/30"
               >
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${outcome.bgColor} ${outcome.color} mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <Icon className="h-6 w-6" />
+                <div className={`shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110`}>
+                  <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{outcome.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{outcome.description}</p>
-                <div className={`absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl bg-gradient-to-r ${outcome.color.replace('text-', 'from-').replace('500', '500')} to-transparent opacity-0 group-hover:opacity-100 transition-opacity`} />
+                <div className="min-w-0">
+                  <h3 className="font-bold text-foreground mb-1">{outcome.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{outcome.description}</p>
+                </div>
               </motion.div>
             );
           })}

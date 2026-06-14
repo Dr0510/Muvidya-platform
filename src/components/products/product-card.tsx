@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,8 @@ interface ProductCardProps {
 export function ProductCard({ product, index }: ProductCardProps) {
   const category = PRODUCT_CATEGORIES.find(c => c.value === product.category);
   const gradient = category?.color || "from-primary-500 to-accent-500";
+  const hasImage = product.images && product.images.length > 0;
+  const imageSrc = hasImage ? product.images[0] : null;
 
   return (
     <motion.div
@@ -38,16 +41,30 @@ export function ProductCard({ product, index }: ProductCardProps) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
     >
-      <Card className="group h-full overflow-hidden hover:shadow-xl hover:shadow-primary-500/5 transition-all duration-300 border-gray-100">
-        <div className={`relative h-48 bg-gradient-to-br ${gradient} p-6 flex items-center justify-center`}>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_0%,transparent_70%)]" />
-          <div className="relative text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-medium mb-3">
-              <Sparkles className="h-3 w-3" />
+      <Card className="group h-full overflow-hidden hover:shadow-elevation-high transition-all duration-300">
+        <div className={`relative h-48 overflow-hidden ${!imageSrc ? `bg-gradient-to-br ${gradient}` : "bg-muted"}`}>
+          {imageSrc ? (
+            <Image
+              src={imageSrc}
+              alt={product.name}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_0%,transparent_70%)]" />
+          )}
+          {/* Gradient overlay at bottom for readability */}
+          {imageSrc && (
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+          )}
+          <div className="relative z-10 p-4 flex items-start justify-between">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/90 backdrop-blur-sm text-foreground/80 text-xs font-medium shadow-sm">
+              <Sparkles className="h-3 w-3 text-primary-500" />
               {category?.label || product.category || "General"}
             </div>
             {product.isFeatured && (
-              <Badge variant="default" className="bg-amber-500 text-white border-0 ml-2">
+              <Badge variant="default" className="bg-amber-500 text-white border-0">
                 Featured
               </Badge>
             )}
@@ -55,16 +72,16 @@ export function ProductCard({ product, index }: ProductCardProps) {
         </div>
         <CardContent className="p-6">
           <div className="flex items-start justify-between mb-2">
-            <h3 className="text-lg font-bold text-gray-900">{product.name}</h3>
+            <h3 className="text-lg font-bold text-foreground">{product.name}</h3>
           </div>
-          <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+          <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
             {product.shortDesc || product.description}
           </p>
           
           {Array.isArray(product.features) && product.features.length > 0 && (
             <ul className="space-y-2 mb-4">
               {(product.features as string[]).slice(0, 3).map((feature) => (
-                <li key={feature} className="flex items-center gap-2 text-sm text-gray-600">
+                <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
                   <CheckCircle2 className="h-4 w-4 text-green-500 flex-shrink-0" />
                   {feature}
                 </li>
@@ -78,10 +95,10 @@ export function ProductCard({ product, index }: ProductCardProps) {
             </Badge>
           )}
 
-          <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+          <div className="flex items-center justify-between pt-2 border-t border-border/60">
             <Link
               href={`/products/${product.slug}`}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors group/link"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-600 transition-colors group/link"
             >
               View Details
               <ArrowRight className="h-4 w-4 group-hover/link:translate-x-1 transition-transform" />

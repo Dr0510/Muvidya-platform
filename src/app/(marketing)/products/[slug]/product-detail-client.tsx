@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { SectionWrapper } from "@/components/shared/section-wrapper";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -19,6 +20,9 @@ import {
   Shield,
   Truck,
   HeadphonesIcon,
+  ChevronLeft,
+  ChevronRight,
+  X,
 } from "lucide-react";
 
 interface Product {
@@ -67,6 +71,8 @@ export function ProductDetailClient({
   relatedProducts,
 }: ProductDetailClientProps) {
   const [activeTab, setActiveTab] = useState<"features" | "specs">("features");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const category = PRODUCT_CATEGORIES.find((c) => c.value === product.category);
   const gradient = category?.color || "from-primary-500 to-accent-500";
@@ -81,40 +87,97 @@ export function ProductDetailClient({
         : [])
     : [];
 
+  const productImages = product.images && product.images.length > 0
+    ? product.images
+    : [];
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
   return (
     <>
       {/* Product Detail */}
       <SectionWrapper className="pt-12 pb-16 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* Image / Hero */}
+            {/* Image / Gallery */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
+              className="space-y-4"
             >
+              {/* Main Image */}
               <div
                 className={cn(
-                  "relative h-80 lg:h-96 rounded-2xl bg-gradient-to-br p-8 flex items-center justify-center overflow-hidden",
-                  gradient
+                  "relative h-80 lg:h-96 rounded-2xl overflow-hidden cursor-pointer group",
+                  productImages.length === 0 ? `bg-gradient-to-br ${gradient}` : "bg-gray-100"
                 )}
+                onClick={() => productImages.length > 0 && openLightbox(0)}
               >
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_0%,transparent_70%)]" />
-                <div className="relative text-center">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-4">
-                    <Sparkles className="h-4 w-4" />
-                    {category?.label || "Product"}
-                  </div>
-                  <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">
-                    {product.name}
-                  </h1>
-                  {product.shortDesc && (
-                    <p className="text-white/80 text-lg max-w-md mx-auto">
-                      {product.shortDesc}
-                    </p>
-                  )}
-                </div>
+                {productImages.length > 0 ? (
+                  <>
+                    <Image
+                      src={productImages[0]}
+                      alt={product.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/90 backdrop-blur-sm text-xs text-gray-700 shadow-sm">
+                        <span className="font-medium">Click to expand</span>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_0%,transparent_70%)]" />
+                    <div className="relative h-full flex flex-col items-center justify-center text-center p-8">
+                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-4">
+                        <Sparkles className="h-4 w-4" />
+                        {category?.label || "Product"}
+                      </div>
+                      <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">
+                        {product.name}
+                      </h1>
+                      {product.shortDesc && (
+                        <p className="text-white/80 text-lg max-w-md mx-auto">
+                          {product.shortDesc}
+                        </p>
+                      )}
+                    </div>
+                  </>
+                )}
               </div>
+
+              {/* Thumbnail Gallery */}
+              {productImages.length > 1 && (
+                <div className="flex gap-3 overflow-x-auto pb-2">
+                  {productImages.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => openLightbox(idx)}
+                      className={cn(
+                        "relative flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all hover:opacity-90",
+                        idx === 0 ? "border-primary-500" : "border-transparent"
+                      )}
+                    >
+                      <Image
+                        src={img}
+                        alt={`${product.name} - Image ${idx + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="80px"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Brochure Download */}
               {product.brochureUrl && (
@@ -122,7 +185,7 @@ export function ProductDetailClient({
                   href={product.brochureUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors w-full justify-center"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors w-full justify-center"
                 >
                   <Download className="h-4 w-4" />
                   Download Brochure
@@ -294,6 +357,82 @@ export function ProductDetailClient({
           )}
         </div>
       </SectionWrapper>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxOpen && productImages.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+            onClick={() => setLightboxOpen(false)}
+          >
+            <button
+              onClick={() => setLightboxOpen(false)}
+              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+              aria-label="Close lightbox"
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            {productImages.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxIndex((prev) =>
+                      prev === 0 ? productImages.length - 1 : prev - 1
+                    );
+                  }}
+                  className="absolute left-4 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxIndex((prev) =>
+                      prev === productImages.length - 1 ? 0 : prev + 1
+                    );
+                  }}
+                  className="absolute right-4 z-10 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </>
+            )}
+
+            <motion.div
+              key={lightboxIndex}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", duration: 0.5 }}
+              className="relative w-full max-w-4xl aspect-[4/3] mx-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={productImages[lightboxIndex]}
+                alt={`${product.name} - Image ${lightboxIndex + 1}`}
+                fill
+                className="object-contain"
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                priority
+              />
+            </motion.div>
+
+            {/* Image counter */}
+            {productImages.length > 1 && (
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm">
+                {lightboxIndex + 1} / {productImages.length}
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (

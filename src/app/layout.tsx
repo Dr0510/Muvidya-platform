@@ -12,8 +12,12 @@ const themeInitScript = `
         ? storedTheme
         : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.dataset.theme = theme;
+      window.__INITIAL_THEME__ = storedTheme === 'dark' || storedTheme === 'light' || storedTheme === 'system'
+        ? storedTheme
+        : 'system';
     } catch (error) {
       document.documentElement.dataset.theme = 'light';
+      window.__INITIAL_THEME__ = 'system';
     }
   })();
 `;

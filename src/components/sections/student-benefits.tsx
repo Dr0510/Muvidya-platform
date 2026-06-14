@@ -17,14 +17,15 @@ const iconMap: Record<string, React.ComponentType<any>> = {
 
 export function StudentBenefits() {
   return (
-    <SectionWrapper id="student-benefits" className="bg-gradient-to-b from-gray-50 to-white">
+    <SectionWrapper className="bg-muted/30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Benefits for Students"
           subtitle="Empowering young minds with future-ready skills and experiences"
+          badge="For Students"
         />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {STUDENT_BENEFITS.map((benefit, index) => {
             const Icon = iconMap[benefit.icon] || Icons.Sparkles;
             return (
@@ -34,14 +35,13 @@ export function StudentBenefits() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08, duration: 0.4 }}
-                whileHover={{ y: -5 }}
-                className="group p-6 rounded-2xl bg-white border border-gray-100 hover:border-primary-100 hover:shadow-lg hover:shadow-primary-500/5 transition-all duration-300"
+                className="group p-6 rounded-2xl border border-border/70 bg-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-elevation-medium hover:border-primary/30"
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary-50 text-primary-600 mb-4 group-hover:scale-110 group-hover:bg-primary-100 transition-all duration-300">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/20">
                   <Icon className="h-6 w-6" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{benefit.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{benefit.description}</p>
+                <h3 className="text-lg font-bold text-foreground mb-2">{benefit.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
               </motion.div>
             );
           })}

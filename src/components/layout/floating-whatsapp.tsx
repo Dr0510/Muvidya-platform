@@ -28,18 +28,18 @@ export function FloatingWhatsApp() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-4 w-72"
+            className="rounded-2xl shadow-2xl border border-border bg-card p-4 w-72"
           >
             <div className="flex items-center gap-3 mb-3">
               <div className="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center">
                 <MessageCircle className="h-5 w-5 text-white" />
               </div>
               <div>
-                <p className="font-semibold text-gray-900 text-sm">MuVidya Support</p>
-                <p className="text-xs text-gray-500">Typically replies in 5 mins</p>
+                <p className="font-semibold text-foreground text-sm">MuVidya Support</p>
+                <p className="text-xs text-muted-foreground">Typically replies in 5 mins</p>
               </div>
             </div>
-            <p className="text-sm text-gray-600 mb-3">
+            <p className="text-sm text-muted-foreground mb-3">
               Hi! How can we help you with MuVidya STEM products?
             </p>
             <a

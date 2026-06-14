@@ -4,112 +4,120 @@ import Link from "next/link";
 import { SITE_CONFIG, NAV_ITEMS } from "@/lib/constants";
 import { Sparkles, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 
-const footerLinks = {
-  Products: [
-    { label: "STEM Kits", href: "/products" },
-    { label: "N-Byte Explorer", href: "/products/n-byte-explorer" },
-    { label: "Workshops", href: "/workshops" },
-    { label: "Brochures", href: "/brochures" },
-  ],
-  Company: [
-    { label: "About Us", href: "/about" },
-    { label: "Blog", href: "/blog" },
-    { label: "Careers", href: "/careers" },
-    { label: "Contact", href: "/contact" },
-  ],
-  Support: [
-    { label: "FAQ", href: "/#faq" },
-    { label: "Shipping", href: "/shipping" },
-    { label: "Returns", href: "/returns" },
-    { label: "Privacy Policy", href: "/privacy" },
-  ],
-};
-
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="relative bg-gray-950 border-t border-gray-800">
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
-      
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-        {/* Main Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
+    <footer className="border-t border-border/60 bg-card">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {/* Brand Column */}
-          <div className="col-span-2 md:col-span-2 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 group mb-4">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-                <Sparkles className="h-5 w-5 text-white" />
+          <div className="sm:col-span-2 lg:col-span-1">
+            <Link href="/" className="flex items-center gap-3 mb-4 group">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-600 text-white shadow-sm transition-transform duration-200 group-hover:scale-105">
+                <Sparkles className="h-5 w-5" />
               </div>
               <div>
-                <span className="text-xl font-bold text-white">{SITE_CONFIG.name}</span>
-                <p className="text-[10px] text-gray-500 tracking-wider uppercase">{SITE_CONFIG.tagline}</p>
+                <span className="text-base font-bold text-foreground">{SITE_CONFIG.name}</span>
               </div>
             </Link>
-            <p className="text-sm text-gray-400 leading-relaxed mb-6 max-w-sm">
+            <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-sm">
               Empowering the next generation of innovators with hands-on STEM education, 
               robotics kits, and coding workshops across India.
             </p>
-            <div className="space-y-3">
-              <a href={`mailto:${SITE_CONFIG.email}`} className="flex items-center gap-2 text-sm text-gray-400 hover:text-primary-400 transition-colors">
-                <Mail className="h-4 w-4" />
-                {SITE_CONFIG.email}
+            <div className="space-y-2.5">
+              <a href={`mailto:${SITE_CONFIG.email}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group">
+                <Mail className="h-3.5 w-3.5 shrink-0" />
+                <span>{SITE_CONFIG.email}</span>
               </a>
-              <a href={`tel:${SITE_CONFIG.phone}`} className="flex items-center gap-2 text-sm text-gray-400 hover:text-primary-400 transition-colors">
-                <Phone className="h-4 w-4" />
-                {SITE_CONFIG.phone}
+              <a href={`tel:${SITE_CONFIG.phone}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group">
+                <Phone className="h-3.5 w-3.5 shrink-0" />
+                <span>{SITE_CONFIG.phone}</span>
               </a>
-              <div className="flex items-center gap-2 text-sm text-gray-400">
-                <MapPin className="h-4 w-4" />
-                {SITE_CONFIG.address}
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <MapPin className="h-3.5 w-3.5 shrink-0" />
+                <span>{SITE_CONFIG.address}</span>
               </div>
             </div>
           </div>
 
-          {/* Link Columns */}
-          {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
-              <h3 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">{title}</h3>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-gray-400 hover:text-primary-400 transition-colors flex items-center gap-1 group"
-                    >
-                      {link.label}
-                      <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">Quick Links</h4>
+            <ul className="space-y-3">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+                  >
+                    <span>{item.label}</span>
+                    <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        {/* Social Links */}
-        <div className="mt-12 pt-8 border-t border-gray-800">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
+          {/* Social Links */}
+          <div>
+            <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">Connect</h4>
+            <ul className="space-y-3">
               {[
                 { label: "Facebook", href: SITE_CONFIG.social.facebook },
                 { label: "Instagram", href: SITE_CONFIG.social.instagram },
                 { label: "YouTube", href: SITE_CONFIG.social.youtube },
                 { label: "LinkedIn", href: SITE_CONFIG.social.linkedin },
-                { label: "Twitter", href: SITE_CONFIG.social.twitter },
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-primary-400 transition-colors text-sm font-medium"
-                >
-                  {social.label}
-                </a>
+                { label: "Twitter / X", href: SITE_CONFIG.social.twitter },
+              ].map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+                  >
+                    <span>{link.label}</span>
+                    <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200" />
+                  </a>
+                </li>
               ))}
-            </div>
-            <p className="text-sm text-gray-500">
-              &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
-            </p>
+            </ul>
+          </div>
+
+          {/* Programs */}
+          <div>
+            <h4 className="text-sm font-bold text-foreground uppercase tracking-wider mb-4">Programs</h4>
+            <ul className="space-y-3">
+              {["School Partnership", "Workshops", "Teacher Training", "STEM Labs", "Online Courses"].map(
+                (program) => (
+                  <li key={program}>
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+                    >
+                      <span>{program}</span>
+                      <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200" />
+                    </Link>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-8 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground">
+            &copy; {year} {SITE_CONFIG.name}. All rights reserved.
+          </p>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>

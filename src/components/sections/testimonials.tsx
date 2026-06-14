@@ -15,25 +15,26 @@ export function Testimonials() {
   const prev = () => setCurrent((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
 
   return (
-    <SectionWrapper id="testimonials" className="bg-gradient-to-b from-white to-gray-50">
+    <SectionWrapper className="bg-background border-y border-border/40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="What People Say"
           subtitle="Hear from educators, parents, and students about their MuVidya experience"
+          badge="Testimonials"
         />
 
         <div className="relative max-w-3xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100"
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-2xl border border-border/50 bg-card p-8 md:p-10 shadow-sm"
             >
-              <Quote className="h-10 w-10 text-primary-200 mb-6" />
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
+              <Quote className="h-8 w-8 text-primary/20 mb-5" />
+              <p className="text-base md:text-lg text-foreground leading-relaxed mb-7">
                 &ldquo;{TESTIMONIALS[current].content}&rdquo;
               </p>
               <div className="flex items-center gap-4">
@@ -44,9 +45,9 @@ export function Testimonials() {
                   size="lg"
                 />
                 <div>
-                  <p className="font-bold text-gray-900">{TESTIMONIALS[current].name}</p>
-                  <p className="text-sm text-gray-500">{TESTIMONIALS[current].role}</p>
-                  <p className="text-xs text-gray-400">{TESTIMONIALS[current].school}</p>
+                  <p className="font-bold text-foreground">{TESTIMONIALS[current].name}</p>
+                  <p className="text-sm text-muted-foreground">{TESTIMONIALS[current].role}</p>
+                  <p className="text-xs text-muted-foreground/60">{TESTIMONIALS[current].school}</p>
                 </div>
                 <div className="ml-auto flex gap-0.5">
                   {Array.from({ length: TESTIMONIALS[current].rating }).map((_, i) => (
@@ -57,11 +58,10 @@ export function Testimonials() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation */}
           <div className="flex items-center justify-center gap-4 mt-8">
             <button
               onClick={prev}
-              className="p-2.5 rounded-full bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-primary-300 transition-all"
+              className="p-2.5 rounded-full border border-border/50 bg-card text-muted-foreground hover:bg-muted hover:text-foreground transition-all duration-200"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -72,7 +72,7 @@ export function Testimonials() {
                   key={index}
                   onClick={() => setCurrent(index)}
                   className={`h-2 rounded-full transition-all duration-300 ${
-                    index === current ? "w-8 bg-primary-500" : "w-2 bg-gray-300 hover:bg-gray-400"
+                    index === current ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
@@ -80,7 +80,7 @@ export function Testimonials() {
             </div>
             <button
               onClick={next}
-              className="p-2.5 rounded-full bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-primary-300 transition-all"
+              className="p-2.5 rounded-full border border-border/50 bg-card text-muted-foreground hover:bg-muted hover:text-foreground transition-all duration-200"
               aria-label="Next testimonial"
             >
               <ChevronRight className="h-5 w-5" />

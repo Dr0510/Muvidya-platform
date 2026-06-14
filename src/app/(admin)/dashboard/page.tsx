@@ -54,8 +54,8 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-sm text-gray-500 mt-1">Overview of your MuVidya platform activity</p>
+        <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+        <p className="text-sm text-muted-foreground mt-1">Overview of your MuVidya platform activity</p>
       </div>
 
       {/* Stats Grid */}
@@ -74,8 +74,8 @@ export default function AdminDashboard() {
                     Live
                   </Badge>
                 </div>
-                <p className="text-2xl font-bold text-gray-900">{stat.value || 0}</p>
-                <p className="text-sm text-gray-500 mt-1">{stat.label}</p>
+                <p className="text-2xl font-bold text-foreground">{stat.value || 0}</p>
+                <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
               </CardContent>
             </Card>
           );
@@ -95,7 +95,7 @@ export default function AdminDashboard() {
                   <Badge variant="default" className={LEAD_STATUS_COLORS[item.status] || ""}>
                     {LEAD_STATUS_LABELS[item.status] || item.status}
                   </Badge>
-                  <span className="text-sm font-semibold text-gray-900">{item._count}</span>
+                  <span className="text-sm font-semibold text-foreground">{item._count}</span>
                 </div>
               ))}
               {(!data?.leadsByStatus || data.leadsByStatus.length === 0) && (
@@ -115,8 +115,8 @@ export default function AdminDashboard() {
               {data?.recentLeads.map((lead: any) => (
                 <div key={lead.id} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
                   <div>
-                    <p className="text-sm font-medium text-gray-900">{lead.name}</p>
-                    <p className="text-xs text-gray-500">{lead.email}</p>
+                    <p className="text-sm font-medium text-foreground">{lead.name}</p>
+                    <p className="text-xs text-muted-foreground">{lead.email}</p>
                   </div>
                   <div className="text-right">
                     <Badge variant="default" className={LEAD_STATUS_COLORS[lead.status] || ""}>

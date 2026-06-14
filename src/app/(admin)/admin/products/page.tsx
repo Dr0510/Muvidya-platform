@@ -115,8 +115,8 @@ export default function AdminProductsPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Products</h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <h1 className="text-2xl font-bold text-foreground">Products</h1>
+          <p className="text-sm text-muted-foreground mt-1">
             Manage your STEM product catalog
           </p>
         </div>
@@ -135,49 +135,49 @@ export default function AdminProductsPage() {
           placeholder="Search products..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="pl-10 bg-white border-gray-200 max-w-md"
+          className="pl-10 bg-background border-border max-w-md"
         />
       </div>
 
       {loading ? (
-        <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
+        <div className="bg-card rounded-xl border border-border p-12 text-center">
           <div className="animate-spin h-8 w-8 border-2 border-primary-500 border-t-transparent rounded-full mx-auto mb-3" />
-          <p className="text-sm text-gray-500">Loading products...</p>
+          <p className="text-sm text-muted-foreground">Loading products...</p>
         </div>
       ) : filteredProducts.length === 0 ? (
-        <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
-            <Package className="h-6 w-6 text-gray-400" />
+        <div className="bg-card rounded-xl border border-border p-12 text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
+            <Package className="h-6 w-6 text-muted-foreground" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-1">
+          <h3 className="text-lg font-semibold text-foreground mb-1">
             {search ? "No products found" : "No products yet"}
           </h3>
-          <p className="text-sm text-gray-500 mb-4">
+          <p className="text-sm text-muted-foreground mb-4">
             {search
               ? "Try a different search term"
               : "Add your first product to get started"}
           </p>
         </div>
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-card rounded-xl border border-border overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-100 bg-gray-50/50">
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Product</th>
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Category</th>
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
-                  <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Created</th>
-                  <th className="text-right px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+                <tr className="border-b border-border bg-muted/30">
+                  <th className="text-left px-6 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Product</th>
+                  <th className="text-left px-6 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Category</th>
+                  <th className="text-left px-6 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Status</th>
+                  <th className="text-left px-6 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Created</th>
+                  <th className="text-right px-6 py-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-border">
                 {filteredProducts.map((product) => {
                   const category = PRODUCT_CATEGORIES.find(
                     (c) => c.value === product.category
                   );
                   return (
-                    <tr key={product.id} className="hover:bg-gray-50/50 transition-colors">
+                    <tr key={product.id} className="hover:bg-muted/30 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
                           <div className={cn("h-10 w-10 rounded-lg flex items-center justify-center text-white text-xs font-bold", category?.color ? `bg-gradient-to-br ${category.color}` : "bg-gradient-to-br from-primary-500 to-accent-500")}>
@@ -185,28 +185,28 @@ export default function AdminProductsPage() {
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <span className="text-sm font-medium text-gray-900">{product.name}</span>
+                              <span className="text-sm font-medium text-foreground">{product.name}</span>
                               {product.isFeatured && (
                                 <Badge className="bg-amber-100 text-amber-700 border-amber-200 text-[10px]">Featured</Badge>
                               )}
                             </div>
-                            <span className="text-xs text-gray-500">{product.slug}</span>
+                            <span className="text-xs text-muted-foreground">{product.slug}</span>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <Badge variant="secondary" className="bg-gray-50 text-gray-600 border-gray-200">
+                        <Badge variant="secondary" className="bg-muted text-muted-foreground border-border">
                           {category?.label || product.category || "General"}
                         </Badge>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
                           <div className={cn("h-2 w-2 rounded-full", product.inStock ? "bg-green-500" : "bg-red-500")} />
-                          <span className="text-sm text-gray-600">{product.inStock ? "In Stock" : "Out of Stock"}</span>
+                          <span className="text-sm text-muted-foreground">{product.inStock ? "In Stock" : "Out of Stock"}</span>
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="text-sm text-gray-500">{formatDate(product.createdAt)}</span>
+                        <span className="text-sm text-muted-foreground">{formatDate(product.createdAt)}</span>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center justify-end gap-1">
@@ -261,15 +261,15 @@ export default function AdminProductsPage() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6"
+              className="bg-card rounded-2xl shadow-xl max-w-md w-full p-6"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
                   <AlertCircle className="h-5 w-5 text-red-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">Delete Product</h3>
-                  <p className="text-sm text-gray-500">This action cannot be undone.</p>
+                  <h3 className="text-lg font-semibold text-foreground">Delete Product</h3>
+                  <p className="text-sm text-muted-foreground">This action cannot be undone.</p>
                 </div>
               </div>
               <div className="flex gap-3 mt-6">

@@ -1,118 +1,145 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
 import { SectionWrapper } from "@/components/shared/section-wrapper";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { PRODUCT_CATEGORIES } from "@/lib/constants";
+import { ArrowRight, Microscope, Cpu, Bot, Code } from "lucide-react";
 import { motion } from "framer-motion";
-import { ArrowRight, Bot, Code, Brain, Cpu, Sparkles, CheckCircle2 } from "lucide-react";
-import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const products = [
   {
     title: "N-Byte Explorer Kit",
-    description: "All-in-one robotics and coding kit with sensors, motors, and microcontroller board.",
-    category: "kit",
-    features: ["Microcontroller Board", "10+ Sensors", "Motors & Wheels", "Project Guidebook"],
-    gradient: "from-cyan-500 to-blue-600",
-    popular: true,
+    description: "Complete robotics kit with microcontroller, sensors, motors, and project guidebook for hands-on STEM learning.",
+    icon: Cpu,
+    gradient: "from-primary to-primary-600",
+    tags: ["Ages 8-18", "Beginner friendly"],
+    image: "/images/products/n-byte-explorer-kit.jpg",
+    slug: "n-byte-explorer-kit-robotics",
   },
   {
-    title: "AI/ML Learning Module",
-    description: "Advanced AI and machine learning module for high school students.",
-    category: "kit",
-    features: ["AI Models", "Python SDK", "Pre-trained Models", "Computer Vision"],
-    gradient: "from-violet-500 to-purple-600",
-    popular: false,
+    title: "STEM Books & Guides",
+    description: "Comprehensive curriculum-aligned textbooks and activity guides for schools and self-learning.",
+    icon: Microscope,
+    gradient: "from-accent to-accent-600",
+    tags: ["Curriculum aligned", "CBSE/ICSE"],
+    image: null,
+    slug: null,
   },
   {
-    title: "IoT Discovery Kit",
-    description: "Explore Internet of Things with sensors, actuators, and cloud connectivity.",
-    category: "kit",
-    features: ["WiFi Module", "Cloud Dashboard", "Sensor Suite", "Mobile App"],
-    gradient: "from-amber-500 to-orange-600",
-    popular: false,
+    title: "Robotics Workshop",
+    description: "On-site workshops conducted by expert instructors. Build working robots in just two days.",
+    icon: Bot,
+    gradient: "from-stem-tech to-purple-600",
+    tags: ["1-5 day programs", "All materials"],
+    image: null,
+    slug: null,
+  },
+  {
+    title: "Coding Programs",
+    description: "From block-based coding to Python and AI/ML — structured learning paths for every level.",
+    icon: Code,
+    gradient: "from-stem-science to-cyan-600",
+    tags: ["Scratch to Python", "AI/ML basics"],
+    image: null,
+    slug: null,
   },
 ];
 
-const iconMap: Record<string, React.ReactNode> = {
-  robotics: <Bot className="h-5 w-5" />,
-  coding: <Code className="h-5 w-5" />,
-  ai: <Brain className="h-5 w-5" />,
-  iot: <Cpu className="h-5 w-5" />,
-};
-
 export function ProductShowcase() {
   return (
-    <SectionWrapper id="products" className="bg-background">
+    <SectionWrapper className="bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          title="Our STEM Products"
-          subtitle="Comprehensive learning kits designed for hands-on STEM education"
+          title="Everything You Need for STEM Education"
+          subtitle="Comprehensive products and programs designed to inspire the next generation of innovators"
+          badge="What We Offer"
         />
 
-        <div className="grid gap-8 md:grid-cols-3">
-          {products.map((product, index) => (
-            <motion.div
-              key={product.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08, duration: 0.45 }}
-            >
-              <Card className="group h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10">
-                <div className={`relative flex h-48 items-center justify-center bg-gradient-to-br p-6 ${product.gradient}`}>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgb(255_255_255_/_0.12)_0%,transparent_70%)]" />
-                  <div className="relative text-center">
-                    <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm">
-                      <Sparkles className="h-3 w-3" />
-                      {PRODUCT_CATEGORIES.find((c) => c.value === product.category)?.label}
-                    </div>
-                    {product.popular && (
-                      <Badge variant="default" className="bg-white/20 text-white">
-                        Popular
-                      </Badge>
-                    )}
-                  </div>
-                </div>
-                <CardContent className="space-y-4 p-6">
-                  <div>
-                    <h3 className="mb-2 text-lg font-bold text-foreground">{product.title}</h3>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{product.description}</p>
-                  </div>
-                  <ul className="space-y-2">
-                    {product.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-bold text-primary transition-colors hover:text-primary-700">
-                    Learn More
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+          {products.map((product, index) => {
+            const Icon = product.icon;
+            return (
+              <motion.div
+                key={product.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.4 }}
+                className={cn(
+                  "group relative overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1.5 hover:shadow-elevation-high",
+                  product.image ? "border border-border/70 bg-card" : "border border-border/70 bg-card p-6 hover:border-primary/30"
+                )}
+              >
+                {/* Gradient accent top */}
+                <div className={`absolute top-0 left-0 right-0 z-10 h-1 bg-gradient-to-r ${product.gradient} opacity-60`} />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center"
-        >
-          <Link href="/products">
-            <Button variant="outline" size="lg" className="gap-2">
-              View All Products
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </Link>
-        </motion.div>
+                {product.image ? (
+                  <>
+                    {/* Image area */}
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={product.image}
+                        alt={product.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
+                      {/* Icon overlay */}
+                      <div className={`absolute top-3 left-3 inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${product.gradient} text-white shadow-sm`}>
+                        <Icon className="h-5 w-5" />
+                      </div>
+                    </div>
+                    {/* Content area */}
+                    <div className="p-5">
+                      <h3 className="text-lg font-bold text-foreground mb-2">{product.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">{product.description}</p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {product.tags.map((tag) => (
+                          <Badge key={tag} variant="primary" size="sm">{tag}</Badge>
+                        ))}
+                      </div>
+                      <Link
+                        href="/products"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all duration-200 group/link"
+                      >
+                        Learn more
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-1" />
+                      </Link>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    {/* No image - icon + text layout */}
+                    <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${product.gradient} text-white mb-4 shadow-sm transition-transform duration-300 group-hover:scale-110`}>
+                      <Icon className="h-6 w-6" />
+                    </div>
+
+                    <h3 className="text-lg font-bold text-foreground mb-2">{product.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{product.description}</p>
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {product.tags.map((tag) => (
+                        <Badge key={tag} variant="primary" size="sm">{tag}</Badge>
+                      ))}
+                    </div>
+
+                    <Link
+                      href="/products"
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all duration-200 group/link"
+                    >
+                      Learn more
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-1" />
+                    </Link>
+                  </>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </SectionWrapper>
   );

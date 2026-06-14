@@ -24,8 +24,8 @@ export default function DemoRequestsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Demo Requests</h1>
-        <p className="text-sm text-gray-500 mt-1">Manage incoming demo requests from schools</p>
+        <h1 className="text-2xl font-bold text-foreground">Demo Requests</h1>
+        <p className="text-sm text-muted-foreground mt-1">Manage incoming demo requests from schools</p>
       </div>
 
       <Card>
@@ -42,21 +42,21 @@ export default function DemoRequestsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-gray-100">
-                    <th className="text-left py-3 px-2 font-semibold text-gray-600">Name</th>
-                    <th className="text-left py-3 px-2 font-semibold text-gray-600">School</th>
-                    <th className="text-left py-3 px-2 font-semibold text-gray-600">City</th>
-                    <th className="text-left py-3 px-2 font-semibold text-gray-600">Grade</th>
-                    <th className="text-left py-3 px-2 font-semibold text-gray-600">Subject</th>
-                    <th className="text-left py-3 px-2 font-semibold text-gray-600">Date</th>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-3 px-2 font-semibold text-muted-foreground">Name</th>
+                    <th className="text-left py-3 px-2 font-semibold text-muted-foreground">School</th>
+                    <th className="text-left py-3 px-2 font-semibold text-muted-foreground">City</th>
+                    <th className="text-left py-3 px-2 font-semibold text-muted-foreground">Grade</th>
+                    <th className="text-left py-3 px-2 font-semibold text-muted-foreground">Subject</th>
+                    <th className="text-left py-3 px-2 font-semibold text-muted-foreground">Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   {requests.map((req: any) => (
-                    <tr key={req.id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
-                      <td className="py-3 px-2 font-medium text-gray-900">{req.lead?.name}</td>
-                      <td className="py-3 px-2 text-gray-600">{req.schoolName || "-"}</td>
-                      <td className="py-3 px-2 text-gray-600">{req.city || "-"}</td>
+                    <tr key={req.id} className="border-b border-border/50 hover:bg-muted/30 transition-colors">
+                      <td className="py-3 px-2 font-medium text-foreground">{req.lead?.name}</td>
+                      <td className="py-3 px-2 text-muted-foreground">{req.schoolName || "-"}</td>
+                      <td className="py-3 px-2 text-muted-foreground">{req.city || "-"}</td>
                       <td className="py-3 px-2">{req.gradeLevel || "-"}</td>
                       <td className="py-3 px-2">{req.subjectArea || "-"}</td>
                       <td className="py-3 px-2 text-gray-500 text-xs">

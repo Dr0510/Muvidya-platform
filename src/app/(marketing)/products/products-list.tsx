@@ -91,7 +91,7 @@ export function ProductsList({ initialProducts }: ProductsListProps) {
   const hasFilters = search || selectedCategory;
 
   return (
-    <SectionWrapper className="pt-28 pb-20 bg-gray-50/50">
+    <SectionWrapper className="pt-28 pb-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Our STEM Products"
@@ -103,28 +103,28 @@ export function ProductsList({ initialProducts }: ProductsListProps) {
           {/* Search & Sort */}
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search products..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pl-10 bg-white border-gray-200"
+                className="pl-10 bg-card border-border/70"
               />
               {search && (
                 <button
                   onClick={() => setSearch("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
                   <X className="h-4 w-4" />
                 </button>
               )}
             </div>
             <div className="relative">
-              <SlidersHorizontal className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <SlidersHorizontal className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
-                className="h-10 pl-10 pr-8 rounded-xl border border-gray-200 bg-white text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 appearance-none cursor-pointer"
+                className="h-10 pl-10 pr-8 rounded-xl border border-border/70 bg-card text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none cursor-pointer"
               >
                 {SORT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -142,8 +142,8 @@ export function ProductsList({ initialProducts }: ProductsListProps) {
               className={cn(
                 "px-4 py-2 rounded-xl text-sm font-medium transition-all",
                 !selectedCategory
-                  ? "bg-primary-500 text-white shadow-sm"
-                  : "bg-white text-gray-600 hover:bg-gray-50 border border-gray-200"
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "bg-card text-muted-foreground hover:bg-surface-muted border border-border/70"
               )}
             >
               All
@@ -159,8 +159,8 @@ export function ProductsList({ initialProducts }: ProductsListProps) {
                 className={cn(
                   "px-4 py-2 rounded-xl text-sm font-medium transition-all",
                   selectedCategory === cat.value
-                    ? "bg-primary-500 text-white shadow-sm"
-                    : "bg-white text-gray-600 hover:bg-gray-50 border border-gray-200"
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "bg-card text-muted-foreground hover:bg-surface-muted border border-border/70"
                 )}
               >
                 {cat.label}
@@ -172,13 +172,13 @@ export function ProductsList({ initialProducts }: ProductsListProps) {
         {/* Results */}
         {filteredProducts.length === 0 ? (
           <div className="text-center py-20">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
-              <Search className="h-6 w-6 text-gray-400" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
+              <Search className="h-6 w-6 text-muted-foreground" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+            <h3 className="text-lg font-semibold text-foreground mb-1">
               No products found
             </h3>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-muted-foreground">
               {hasFilters
                 ? "Try adjusting your search or filter criteria"
                 : "Products will appear here once added"}
@@ -198,7 +198,7 @@ export function ProductsList({ initialProducts }: ProductsListProps) {
           </div>
         ) : (
           <>
-            <p className="text-sm text-gray-500 mb-6">
+            <p className="text-sm text-muted-foreground mb-6">
               Showing {filteredProducts.length} product
               {filteredProducts.length !== 1 ? "s" : ""}
               {selectedCategory

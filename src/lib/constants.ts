@@ -1,8 +1,8 @@
 export const SITE_CONFIG = {
-  name: "MuVidya",
+  name: "MμVidya",
   tagline: "Where Young Minds Build the Future",
   description:
-    "MuVidya offers cutting-edge STEM education kits, robotics workshops, and hands-on learning experiences for schools and students across India. Empowering the next generation of innovators.",
+    "MμVidya offers cutting-edge STEM education kits, robotics workshops, and hands-on learning experiences for schools and students across India. Empowering the next generation of innovators.",
   url: process.env.NEXT_PUBLIC_APP_URL || "https://muvidya.com",
   ogImage: "/images/brand/og-image.jpg",
   keywords: [
@@ -13,11 +13,11 @@ export const SITE_CONFIG = {
     "educational technology",
     "India STEM education",
     "N-Byte Explorer Kit",
-    "MuVidya",
+    "MμVidya",
     "robotics for schools",
     "hands-on learning",
   ] as string[],
-  author: "MuVidya",
+  author: "MμVidya",
   email: "hello@muvidya.com",
   phone: "+91 98765 43210",
   address: "Bengaluru, Karnataka, India",
@@ -34,14 +34,29 @@ export const SITE_CONFIG = {
   },
 } as const;
 
-export const NAV_ITEMS = [
+export interface NavItem {
+  label: string;
+  href: string;
+  /** Optional children for dropdown menus (future scalability) */
+  children?: { label: string; href: string; description?: string }[];
+}
+
+export const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "Products", href: "/products" },
+  {
+    label: "Products",
+    href: "/products",
+    children: [
+      { label: "STEM Kits", href: "/products?category=kit", description: "Hands-on learning kits" },
+      { label: "Books & Guides", href: "/products?category=book", description: "Curriculum-aligned resources" },
+      { label: "Accessories", href: "/products?category=accessory", description: "Spare parts & add-ons" },
+    ],
+  },
   { label: "Workshops", href: "/workshops" },
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
-] as const;
+];
 
 export const PRODUCT_CATEGORIES = [
   { value: "kit", label: "STEM Kits", color: "from-cyan-500 to-blue-600" },

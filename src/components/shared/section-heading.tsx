@@ -7,8 +7,8 @@ interface SectionHeadingProps {
   title: string;
   subtitle?: string;
   className?: string;
-  align?: "center" | "left";
-  gradient?: boolean;
+  align?: "left" | "center";
+  badge?: string;
 }
 
 export function SectionHeading({
@@ -16,30 +16,29 @@ export function SectionHeading({
   subtitle,
   className,
   align = "center",
-  gradient = true,
+  badge,
 }: SectionHeadingProps) {
   return (
-    <AnimatedSection className={cn("mb-12 md:mb-16", className)}>
-      <div className={cn(align === "center" ? "text-center" : "text-left")}>
-        <h2
-          className={cn(
-            "text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl",
-            gradient
-              ? "gradient-text"
-              : "text-foreground"
-          )}
-        >
-          {title}
-        </h2>
-        {subtitle && (
-          <p
-            className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl"
-            style={align === "left" ? { marginLeft: 0 } : undefined}
-          >
-            {subtitle}
-          </p>
-        )}
-      </div>
+    <AnimatedSection
+      className={cn(
+        "max-w-3xl mb-12 md:mb-16",
+        align === "center" && "mx-auto text-center",
+        className
+      )}
+    >
+      {badge && (
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/15 mb-4">
+          {badge}
+        </span>
+      )}
+      <h2 className="text-h2 md:text-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground tracking-tight">
+        {title}
+      </h2>
+      {subtitle && (
+        <p className="mt-4 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          {subtitle}
+        </p>
+      )}
     </AnimatedSection>
   );
 }

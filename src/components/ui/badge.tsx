@@ -1,45 +1,43 @@
-import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
-const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors",
-  {
-    variants: {
-      variant: {
-        default:
-          "border-transparent bg-primary/10 text-primary",
-        secondary:
-          "border-transparent bg-muted text-muted-foreground",
-        destructive:
-          "border-transparent bg-destructive/10 text-destructive",
-        success:
-          "border-transparent bg-success/10 text-success",
-        warning:
-          "border-transparent bg-warning/10 text-warning",
-        info:
-          "border-transparent bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200",
-        outline: "text-foreground border-border",
-      },
-      size: {
-        default: "px-2.5 py-0.5 text-xs",
-        sm: "px-2 py-0.25 text-[10px]",
-        lg: "px-4 py-1 text-sm",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-);
-
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
-
-function Badge({ className, variant, size, ...props }: BadgeProps) {
-  return <div className={cn(badgeVariants({ variant, size }), className)} {...props} />;
+interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
+  variant?: "default" | "primary" | "secondary" | "accent" | "outline" | "success";
+  size?: "sm" | "md";
 }
 
-export { Badge, badgeVariants };
+const variantStyles: Record<string, string> = {
+  default: "bg-muted text-muted-foreground border-border/40",
+  primary: "bg-primary/10 text-primary border-primary/15",
+  secondary: "bg-surface-muted text-muted-foreground border-border/40",
+  accent: "bg-accent/10 text-accent border-accent/15",
+  outline: "bg-transparent text-foreground border-border/50",
+  success: "bg-success/10 text-success border-success/15",
+};
+
+const sizeStyles: Record<string, string> = {
+  sm: "px-2.5 py-0.5 text-[11px] rounded-full",
+  md: "px-3 py-1 text-xs rounded-full",
+};
+
+export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
+  ({ className, variant = "default", size = "sm", children, ...props }, ref) => {
+    return (
+      <span
+        ref={ref}
+        className={cn(
+          "inline-flex items-center gap-1.5 font-semibold border",
+          variantStyles[variant],
+          sizeStyles[size],
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </span>
+    );
+  }
+);
+Badge.displayName = "Badge";
+
+export type { BadgeProps };

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { demoRequestSchema, type DemoRequestData } from "@/lib/validation";
 import { cn } from "@/lib/utils";
-import { Loader2, CheckCircle, Calendar, School, MapPin, Users } from "lucide-react";
+import { Loader2, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
 
 export function DemoBookingForm() {
@@ -45,16 +45,16 @@ export function DemoBookingForm() {
   if (isSuccess) {
     return (
       <div className="text-center py-12 px-6">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-600 mb-6">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-success/10 text-success mb-6">
           <CheckCircle className="h-8 w-8" />
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You! 🎉</h3>
-        <p className="text-gray-600 mb-6">
+        <h3 className="text-2xl font-bold text-foreground mb-2">Thank You! 🎉</h3>
+        <p className="text-muted-foreground mb-6">
           Your demo request has been received. Our team will reach out within 24 hours to schedule your personalized demo.
         </p>
         <button
           onClick={() => { setIsSuccess(false); reset(); }}
-          className="text-primary-600 font-semibold hover:text-primary-700 transition-colors"
+          className="text-primary font-semibold hover:text-primary-600 transition-colors"
         >
           Submit another request
         </button>
@@ -66,97 +66,97 @@ export function DemoBookingForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Full Name *</label>
+          <label className="block text-sm font-medium text-foreground/80 mb-1.5">Full Name *</label>
           <input
             {...register("name")}
             placeholder="Your full name"
             className={cn(
-              "w-full px-4 py-3 rounded-xl border bg-white text-sm transition-colors",
-              "focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500",
-              errors.name ? "border-red-300" : "border-gray-200"
+              "w-full px-4 py-3 rounded-xl border bg-background text-foreground text-sm placeholder:text-muted-foreground transition-colors",
+              "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary",
+              errors.name ? "border-destructive/60" : "border-border"
             )}
           />
-          {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name.message}</p>}
+          {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Email Address *</label>
+          <label className="block text-sm font-medium text-foreground/80 mb-1.5">Email Address *</label>
           <input
             {...register("email")}
             type="email"
             placeholder="your@email.com"
             className={cn(
-              "w-full px-4 py-3 rounded-xl border bg-white text-sm transition-colors",
-              "focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500",
-              errors.email ? "border-red-300" : "border-gray-200"
+              "w-full px-4 py-3 rounded-xl border bg-background text-foreground text-sm placeholder:text-muted-foreground transition-colors",
+              "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary",
+              errors.email ? "border-destructive/60" : "border-border"
             )}
           />
-          {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
+          {errors.email && <p className="text-xs text-destructive mt-1">{errors.email.message}</p>}
         </div>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Phone Number *</label>
+          <label className="block text-sm font-medium text-foreground/80 mb-1.5">Phone Number *</label>
           <input
             {...register("phone")}
             type="tel"
             placeholder="+91 98765 43210"
             className={cn(
-              "w-full px-4 py-3 rounded-xl border bg-white text-sm transition-colors",
-              "focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500",
-              errors.phone ? "border-red-300" : "border-gray-200"
+              "w-full px-4 py-3 rounded-xl border bg-background text-foreground text-sm placeholder:text-muted-foreground transition-colors",
+              "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary",
+              errors.phone ? "border-destructive/60" : "border-border"
             )}
           />
-          {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone.message}</p>}
+          {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone.message}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">School Name *</label>
+          <label className="block text-sm font-medium text-foreground/80 mb-1.5">School Name *</label>
           <input
             {...register("schoolName")}
             placeholder="Name of your school"
             className={cn(
-              "w-full px-4 py-3 rounded-xl border bg-white text-sm transition-colors",
-              "focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500",
-              errors.schoolName ? "border-red-300" : "border-gray-200"
+              "w-full px-4 py-3 rounded-xl border bg-background text-foreground text-sm placeholder:text-muted-foreground transition-colors",
+              "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary",
+              errors.schoolName ? "border-destructive/60" : "border-border"
             )}
           />
-          {errors.schoolName && <p className="text-xs text-red-500 mt-1">{errors.schoolName.message}</p>}
+          {errors.schoolName && <p className="text-xs text-destructive mt-1">{errors.schoolName.message}</p>}
         </div>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">City *</label>
+          <label className="block text-sm font-medium text-foreground/80 mb-1.5">City *</label>
           <input
             {...register("city")}
             placeholder="City"
             className={cn(
-              "w-full px-4 py-3 rounded-xl border bg-white text-sm transition-colors",
-              "focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500",
-              errors.city ? "border-red-300" : "border-gray-200"
+              "w-full px-4 py-3 rounded-xl border bg-background text-foreground text-sm placeholder:text-muted-foreground transition-colors",
+              "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary",
+              errors.city ? "border-destructive/60" : "border-border"
             )}
           />
-          {errors.city && <p className="text-xs text-red-500 mt-1">{errors.city.message}</p>}
+          {errors.city && <p className="text-xs text-destructive mt-1">{errors.city.message}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">State *</label>
+          <label className="block text-sm font-medium text-foreground/80 mb-1.5">State *</label>
           <input
             {...register("state")}
             placeholder="State"
             className={cn(
-              "w-full px-4 py-3 rounded-xl border bg-white text-sm transition-colors",
-              "focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500",
-              errors.state ? "border-red-300" : "border-gray-200"
+              "w-full px-4 py-3 rounded-xl border bg-background text-foreground text-sm placeholder:text-muted-foreground transition-colors",
+              "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary",
+              errors.state ? "border-destructive/60" : "border-border"
             )}
           />
-          {errors.state && <p className="text-xs text-red-500 mt-1">{errors.state.message}</p>}
+          {errors.state && <p className="text-xs text-destructive mt-1">{errors.state.message}</p>}
         </div>
       </div>
 
       <div className="grid sm:grid-cols-3 gap-5">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Grade Level</label>
-          <select {...register("gradeLevel")} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500">
+          <label className="block text-sm font-medium text-foreground/80 mb-1.5">Grade Level</label>
+          <select {...register("gradeLevel")} className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
             <option value="">Select grade</option>
             <option value="primary">Primary (1-5)</option>
             <option value="middle">Middle (6-8)</option>
@@ -164,8 +164,8 @@ export function DemoBookingForm() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Subject Area</label>
-          <select {...register("subjectArea")} className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500">
+          <label className="block text-sm font-medium text-foreground/80 mb-1.5">Subject Area</label>
+          <select {...register("subjectArea")} className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
             <option value="">Select subject</option>
             <option value="robotics">Robotics</option>
             <option value="coding">Coding</option>
@@ -175,30 +175,30 @@ export function DemoBookingForm() {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1.5">Student Count</label>
+          <label className="block text-sm font-medium text-foreground/80 mb-1.5">Student Count</label>
           <input
             {...register("studentCount")}
             type="number"
             placeholder="Number of students"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500"
+            className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5">Message (Optional)</label>
+        <label className="block text-sm font-medium text-foreground/80 mb-1.5">Message (Optional)</label>
         <textarea
           {...register("message")}
           rows={3}
           placeholder="Any specific requirements or questions..."
-          className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 resize-none"
+          className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none"
         />
       </div>
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-3.5 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold text-sm hover:shadow-lg hover:shadow-primary-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-amber-950 font-semibold text-sm shadow-md shadow-amber-500/25 hover:shadow-lg hover:shadow-amber-500/35 hover:brightness-110 hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {isSubmitting ? (
           <>

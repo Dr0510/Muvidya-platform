@@ -17,7 +17,7 @@ interface AuthLayoutProps {
 
 export function AuthLayout({ children, title, subtitle, altLink }: AuthLayoutProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-accent-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-background to-accent-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(99,102,241,0.08)_0%,transparent_50%),radial-gradient(circle_at_70%_80%,rgba(34,197,94,0.08)_0%,transparent_50%)]" />
       
       <motion.div
@@ -33,8 +33,8 @@ export function AuthLayout({ children, title, subtitle, altLink }: AuthLayoutPro
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <div className="flex flex-col items-start">
-              <span className="text-xl font-bold text-gray-900">MuVidya</span>
-              <span className="text-[10px] font-medium tracking-wider text-gray-500">
+              <span className="text-xl font-bold text-foreground">MuVidya</span>
+              <span className="text-[10px] font-medium tracking-wider text-muted-foreground">
                 Where Young Minds Build the Future
               </span>
             </div>
@@ -42,20 +42,20 @@ export function AuthLayout({ children, title, subtitle, altLink }: AuthLayoutPro
         </div>
 
         {/* Card */}
-        <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8">
+        <div className="bg-card/80 backdrop-blur-xl rounded-2xl shadow-xl border border-border/60 p-8">
           <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
-            <p className="text-sm text-gray-500 mt-1">{subtitle}</p>
+            <h1 className="text-2xl font-bold text-foreground">{title}</h1>
+            <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>
           </div>
 
           {children}
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-muted-foreground">
               {altLink.label}{" "}
               <Link
                 href={altLink.href}
-                className="font-semibold text-primary-600 hover:text-primary-700 transition-colors"
+                className="font-semibold text-primary hover:text-primary-600 transition-colors"
               >
                 {altLink.text}
               </Link>

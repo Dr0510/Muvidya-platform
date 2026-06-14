@@ -15,31 +15,38 @@ const iconMap: Record<string, React.ComponentType<any>> = {
 
 export function SchoolBenefits() {
   return (
-    <SectionWrapper id="school-benefits" className="bg-white">
+    <SectionWrapper className="bg-gradient-to-b from-background via-background to-muted/20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Benefits for Schools"
-          subtitle="Comprehensive STEM education solutions for educational institutions"
+          subtitle="Comprehensive STEM education solutions designed for institutions"
+          badge="For Schools"
         />
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 gap-5 md:gap-6">
           {SCHOOL_BENEFITS.map((benefit, index) => {
-            const Icon = iconMap[benefit.icon] || Icons.BookOpen;
+            const Icon = iconMap[benefit.icon] || Icons.Sparkles;
             return (
               <motion.div
                 key={benefit.title}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                whileHover={{ y: -4 }}
-                className="group relative p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:border-primary-100 transition-all duration-300"
+                transition={{ delay: index * 0.1, duration: 0.4 }}
+                className="group relative overflow-hidden rounded-2xl border border-border/70 bg-card p-6 md:p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-elevation-high hover:border-primary/20"
               >
-                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${benefit.gradient} text-white mb-5 group-hover:scale-110 transition-transform duration-300`}>
-                  <Icon className="h-7 w-7" />
+                {/* Gradient accent strip */}
+                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${benefit.gradient} opacity-40`} />
+
+                <div className="flex items-start gap-5">
+                  <div className={`shrink-0 flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${benefit.gradient} text-white shadow-sm transition-transform duration-300 group-hover:scale-110`}>
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground mb-1.5">{benefit.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{benefit.title}</h3>
-                <p className="text-gray-500 leading-relaxed">{benefit.description}</p>
               </motion.div>
             );
           })}
