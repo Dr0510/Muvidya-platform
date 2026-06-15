@@ -18,9 +18,9 @@ export const SITE_CONFIG = {
     "hands-on learning",
   ] as string[],
   author: "MμVidya",
-  email: "hello@muvidya.com",
-  phone: "+91 98765 43210",
-  address: "Bengaluru, Karnataka, India",
+  email: "contact@muvidya.com",
+  phone: "+91 9022477635",
+  address: "102, AIIC, MIT west campus, Gate no 5, MIT Engineering college, Beed bypass road Satara parisar Chhatrapati sambhajinagar -431010",
   social: {
     facebook: "https://facebook.com/muvidya",
     instagram: "https://instagram.com/muvidya",
