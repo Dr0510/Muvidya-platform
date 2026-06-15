@@ -76,10 +76,10 @@ export function ProductShowcase() {
                 {/* Gradient accent top */}
                 <div className={`absolute top-0 left-0 right-0 z-10 h-1 bg-gradient-to-r ${product.gradient} opacity-60`} />
 
-                {product.image ? (
-                  <>
-                    {/* Image area */}
-                    <div className="relative h-48 overflow-hidden">
+                  {product.image ? (
+                    <>
+                      {/* Image area */}
+                      <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={product.image}
                         alt={product.title}

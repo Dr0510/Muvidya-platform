@@ -67,16 +67,16 @@ export function HeroSection() {
             </AnimatedSection>
 
             <AnimatedSection delay={500}>
-              <div className="grid grid-cols-3 gap-6 border-t border-border/40 pt-6">
-                {STATS.slice(0, 3).map((stat) => (
-                  <div key={stat.label}>
-                    <p className="text-2xl sm:text-3xl font-bold text-foreground">{stat.value}</p>
-                    <p className="mt-1 text-xs sm:text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
+                <div className="grid grid-cols-3 gap-4 sm:gap-6 border-t border-border/40 pt-6">
+                  {STATS.slice(0, 3).map((stat) => (
+                    <div key={stat.label}>
+                      <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{stat.value}</p>
+                      <p className="mt-1 text-[10px] sm:text-xs lg:text-sm font-medium uppercase tracking-wider text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis">
+                        {stat.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
             </AnimatedSection>
           </div>
 

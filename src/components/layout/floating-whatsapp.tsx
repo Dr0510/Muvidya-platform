@@ -21,7 +21,7 @@ export function FloatingWhatsApp() {
   const whatsappUrl = `https://wa.me/${SITE_CONFIG.whatsapp.number.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(SITE_CONFIG.whatsapp.message)}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-3">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-30 flex flex-col items-end gap-3">
       <AnimatePresence>
         {isOpen && (
           <motion.div

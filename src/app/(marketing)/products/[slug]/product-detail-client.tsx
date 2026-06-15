@@ -236,21 +236,20 @@ export function ProductDetailClient({
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <Link href="/contact">
-                  <Button
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30"
-                  >
-                    Request a Demo
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button variant="outline" size="lg" className="w-full">
-                    <FileText className="mr-2 h-4 w-4" />
-                    Enquire Now
-                  </Button>
-                </Link>
+                <a
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-200 hover:-translate-y-0.5"
+                >
+                  Request a Demo
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border border-border/70 bg-transparent text-foreground hover:bg-muted hover:border-foreground/20 transition-all duration-200"
+                >
+                  <FileText className="h-4 w-4" />
+                  Enquire Now
+                </a>
               </div>
 
               {/* Perks */}
