@@ -11,7 +11,7 @@ export default function TermsPage() {
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-foreground mb-8">Terms of Service</h1>
       <div className="prose prose-sm max-w-none text-muted-foreground space-y-6">
-        <p>Last updated: {new Date().toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" })}</p>
+        <p>Last updated: June 15, 2026</p>
 
         <h2 className="text-xl font-semibold text-foreground mt-8">1. Acceptance of Terms</h2>
         <p>
@@ -20,7 +20,7 @@ export default function TermsPage() {
 
         <h2 className="text-xl font-semibold text-foreground mt-8">2. Description of Services</h2>
         <p>
-          {SITE_CONFIG.name} provides STEM education products, robotics kits, workshops, and related educational services for schools and students across India.
+          {SITE_CONFIG.name} provides STEM education products, robotics learning platforms, workshops, and related educational services for schools and students across India.
         </p>
 
         <h2 className="text-xl font-semibold text-foreground mt-8">3. User Obligations</h2>

@@ -4,7 +4,9 @@ import { SectionWrapper } from "@/components/shared/section-wrapper";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { DemoBookingForm } from "@/components/forms/demo-booking-form";
+import { ContactForm } from "@/components/forms/contact-form";
 import { SITE_CONFIG } from "@/lib/constants";
+import { useState } from "react";
 
 const contactInfo = [
   { icon: Mail, label: "Email", value: SITE_CONFIG.email, href: `mailto:${SITE_CONFIG.email}` },
@@ -14,6 +16,8 @@ const contactInfo = [
 ];
 
 export function ContactSection() {
+  const [activeTab, setActiveTab] = useState<"demo" | "contact">("demo");
+
   return (
     <SectionWrapper className="bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -51,11 +55,44 @@ export function ContactSection() {
             })}
           </div>
 
-          {/* Booking Form */}
+          {/* Forms with tab switching */}
           <div className="rounded-2xl border border-border/50 bg-card p-6 md:p-8 shadow-sm">
-            <h3 className="text-lg font-bold text-foreground mb-1">Book a Free Demo</h3>
-            <p className="text-sm text-muted-foreground mb-6">Fill in your details and our team will get back to you.</p>
-            <DemoBookingForm />
+            <div className="flex gap-2 mb-6 border-b border-border/60 pb-3">
+              <button
+                onClick={() => setActiveTab("demo")}
+                className={`text-sm font-semibold px-4 py-2 rounded-lg transition-all ${
+                  activeTab === "demo"
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                }`}
+              >
+                Book a Free Demo
+              </button>
+              <button
+                onClick={() => setActiveTab("contact")}
+                className={`text-sm font-semibold px-4 py-2 rounded-lg transition-all ${
+                  activeTab === "contact"
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                }`}
+              >
+                Send a Message
+              </button>
+            </div>
+
+            {activeTab === "demo" ? (
+              <>
+                <h3 className="text-lg font-bold text-foreground mb-1">Book a Free Demo</h3>
+                <p className="text-sm text-muted-foreground mb-6">Fill in your details and our team will get back to you.</p>
+                <DemoBookingForm />
+              </>
+            ) : (
+              <>
+                <h3 className="text-lg font-bold text-foreground mb-1">Send a Message</h3>
+                <p className="text-sm text-muted-foreground mb-6">Have a question? We'd love to hear from you.</p>
+                <ContactForm />
+              </>
+            )}
           </div>
         </div>
       </div>

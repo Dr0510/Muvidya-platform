@@ -1,18 +1,18 @@
 export const SITE_CONFIG = {
   name: "MμVidya",
-  tagline: "Where Young Minds Build the Future",
+  tagline: "Learn by Building",
   description:
-    "MμVidya offers cutting-edge STEM education kits, robotics workshops, and hands-on learning experiences for schools and students across India. Empowering the next generation of innovators.",
+    "MμVidya offers cutting-edge STEM education learning platforms, robotics workshops, and hands-on learning experiences for schools and students across India. Empowering the next generation of innovators.",
   url: process.env.NEXT_PUBLIC_APP_URL || "https://muvidya.com",
   ogImage: "/images/brand/og-image.jpg",
   keywords: [
     "STEM education",
-    "robotics kits",
+    "robotics Learning Platform",
     "coding for kids",
     "STEM workshops",
     "educational technology",
     "India STEM education",
-    "N-Byte Explorer Kit",
+    "N-Byte Learning Platform",
     "MμVidya",
     "robotics for schools",
     "hands-on learning",
@@ -110,10 +110,9 @@ export const LEAD_STATUS_COLORS: Record<string, string> = {
 };
 
 export const STATS = [
-  { value: "500+", label: "Schools Partnered" },
-  { value: "50,000+", label: "Students Empowered" },
-  { value: "200+", label: "Workshops Conducted" },
-  { value: "98%", label: "Satisfaction Rate" },
+  { value: "5+", label: "Schools Partnered" },
+  { value: "100+", label: "Students Empowered" },
+  { value: "3+", label: "Workshops Conducted" },
 ];
 
 export const TESTIMONIALS = [
@@ -171,9 +170,9 @@ export const FAQ_ITEMS = [
       "Yes! We conduct on-site workshops at schools across India. Our team brings all necessary materials and equipment. Workshops range from 1-day introductory sessions to week-long intensive programs. Contact us to schedule a workshop at your school.",
   },
   {
-    question: "What is included in the N-Byte Explorer Kit?",
+    question: "What is included in the N-Byte Learning Platform?",
     answer:
-      "The N-Byte Explorer Kit includes a microcontroller board, sensors (ultrasonic, IR, temperature, etc.), motors, wheels, connecting wires, LEDs, resistors, a comprehensive project guidebook, and access to our online learning platform with video tutorials and coding challenges.",
+      "The N-Byte Learning Platform includes a microcontroller board, sensors (ultrasonic, IR, temperature, etc.), motors, wheels, connecting wires, LEDs, resistors, a comprehensive project guidebook, and access to our online learning platform with video tutorials and coding challenges.",
   },
   {
     question: "Is prior coding knowledge required?",

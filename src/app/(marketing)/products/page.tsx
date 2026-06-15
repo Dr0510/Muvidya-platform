@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Explore MuVidya's STEM education kits, robotics kits, coding modules, and hands-on learning tools for schools and students.",
+    "Explore MuVidya's STEM education learning platforms, robotics learning platforms, coding modules, and hands-on learning tools for schools and students.",
 };
 
 async function getProducts() {

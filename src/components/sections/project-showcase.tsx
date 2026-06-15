@@ -44,7 +44,7 @@ export function ProjectShowcase() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Student Projects That Inspire"
-          subtitle="See what young minds create with MuVidya kits and guidance — real projects from real students"
+          subtitle="See what young minds create with MuVidya learning platforms and guidance — real projects from real students"
           badge="Student Work"
         />
 

@@ -11,8 +11,8 @@ import { cn } from "@/lib/utils";
 
 const products = [
   {
-    title: "N-Byte Explorer Kit",
-    description: "Complete robotics kit with microcontroller, sensors, motors, and project guidebook for hands-on STEM learning.",
+    title: "N-Byte Learning Platform",
+    description: "Complete robotics learning platform with microcontroller, sensors, motors, and project guidebook for hands-on STEM education.",
     icon: Cpu,
     gradient: "from-primary to-primary-600",
     tags: ["Ages 8-18", "Beginner friendly"],

@@ -12,7 +12,7 @@ export function AboutStats() {
           <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-white/10 blur-3xl" />
           <div className="absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-white/10 blur-3xl" />
 
-          <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="relative grid grid-cols-1 sm:grid-cols-3 gap-8">
             {STATS.map((stat, index) => (
               <AnimatedSection key={stat.label} className="text-center">
                 <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1">

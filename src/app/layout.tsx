@@ -160,7 +160,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-foreground">
+      <body className="antialiased min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-foreground" suppressHydrationWarning>
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -4,12 +4,9 @@ import { ProductShowcase } from "@/components/sections/product-showcase";
 import { LearningOutcomes } from "@/components/sections/learning-outcomes";
 import { ProjectShowcase } from "@/components/sections/project-showcase";
 import { SchoolBenefits } from "@/components/sections/school-benefits";
-import { StudentBenefits } from "@/components/sections/student-benefits";
 import { Testimonials } from "@/components/sections/testimonials";
-import { ContactSection } from "@/components/sections/contact-section";
 import { FAQSection } from "@/components/sections/faq-section";
-import { CTASection } from "@/components/sections/cta-section";
-import { NewsletterSection } from "@/components/sections/newsletter-section";
+import { ContactSection } from "@/components/sections/contact-section";
 
 export default function HomePage() {
   return (
@@ -20,12 +17,9 @@ export default function HomePage() {
       <LearningOutcomes />
       <ProjectShowcase />
       <SchoolBenefits />
-      <StudentBenefits />
       <Testimonials />
-      <ContactSection />
       <FAQSection />
-      <CTASection />
-      <NewsletterSection />
+      <ContactSection />
     </>
   );
 }

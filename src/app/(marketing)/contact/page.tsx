@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ContactHero } from "./contact-hero";
 import { ContactSection } from "@/components/sections/contact-section";
-import { CTASection } from "@/components/sections/cta-section";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -19,7 +18,6 @@ export default function ContactPage() {
     <>
       <ContactHero />
       <ContactSection />
-      <CTASection />
     </>
   );
 }

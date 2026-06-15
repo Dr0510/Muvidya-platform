@@ -19,7 +19,7 @@ const POSTS = [
   {
     slug: "getting-started-with-robotics",
     title: "Getting Started with Robotics: A Beginner's Guide",
-    excerpt: "Everything you need to know to start your robotics journey — from choosing the right kit to building your first robot.",
+    excerpt: "Everything you need to know to start your robotics journey — from choosing the right learning platform to building your first robot.",
     date: "June 5, 2026",
     readTime: "7 min read",
     category: "Robotics",

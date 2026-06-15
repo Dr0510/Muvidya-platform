@@ -6,7 +6,7 @@ import { STATS } from "@/lib/constants";
 import { Sparkles, Building2, Users, GraduationCap, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
 
-const statIcons = [Building2, Users, GraduationCap, Trophy];
+const statIcons = [Building2, Users, GraduationCap];
 
 export function TrustSection() {
   return (
@@ -25,7 +25,7 @@ export function TrustSection() {
           </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto">
           {STATS.map((stat, index) => {
             const Icon = statIcons[index];
             return (

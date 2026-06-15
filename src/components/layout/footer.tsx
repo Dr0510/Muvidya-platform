@@ -1,11 +1,16 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { SITE_CONFIG, NAV_ITEMS } from "@/lib/constants";
 import { Sparkles, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 
 export function Footer() {
-  const year = new Date().getFullYear();
+  const [year, setYear] = useState(2024);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
 
   return (
     <footer className="border-t border-border/60 bg-card">
@@ -23,7 +28,7 @@ export function Footer() {
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-sm">
               Empowering the next generation of innovators with hands-on STEM education, 
-              robotics kits, and coding workshops across India.
+              robotics learning platforms, and coding workshops across India.
             </p>
             <div className="space-y-2.5">
               <a href={`mailto:${SITE_CONFIG.email}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group">

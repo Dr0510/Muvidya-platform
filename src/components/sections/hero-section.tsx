@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { AnimatedSection } from "@/components/shared/section-wrapper";
-import { STATS } from "@/lib/constants";
 
 export function HeroSection() {
   return (
@@ -31,16 +30,14 @@ export function HeroSection() {
 
             <AnimatedSection delay={200}>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-foreground">
-                Where Young Minds
-                <br />
-                <span className="gradient-text">Build the Future</span>
+                <span className="gradient-text">Learn by Building</span>
               </h1>
             </AnimatedSection>
 
             <AnimatedSection delay={300}>
               <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl">
                 Empower the next generation with hands-on STEM education.
-                Robotics kits, coding workshops, and innovative learning experiences
+                Robotics workshops, coding programs, and innovative learning experiences
                 for schools and students across India.
               </p>
             </AnimatedSection>
@@ -66,18 +63,6 @@ export function HeroSection() {
               </div>
             </AnimatedSection>
 
-            <AnimatedSection delay={500}>
-                <div className="grid grid-cols-3 gap-4 sm:gap-6 border-t border-border/40 pt-6">
-                  {STATS.slice(0, 3).map((stat) => (
-                    <div key={stat.label}>
-                      <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">{stat.value}</p>
-                      <p className="mt-1 text-[10px] sm:text-xs lg:text-sm font-medium uppercase tracking-wider text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis">
-                        {stat.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-            </AnimatedSection>
           </div>
 
           {/* Right Column - Product Image Showcase */}
@@ -91,7 +76,7 @@ export function HeroSection() {
                 <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gradient-to-br from-primary/10 to-accent/5">
                   <Image
                     src="/images/products/n-byte-explorer-kit.jpg"
-                    alt="N-Byte Explorer Kit"
+                    alt="N-Byte Learning Platform"
                     fill
                     className="object-cover transition-transform duration-700 hover:scale-105"
                     sizes="(max-width: 1024px) 50vw, 40vw"
@@ -103,7 +88,7 @@ export function HeroSection() {
                   {/* Badge overlay */}
                   <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur-sm px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm">
                     <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
-                    N-Byte Explorer Kit
+                    N-Byte Learning Platform
                   </div>
 
                   {/* Feature tags at bottom */}
@@ -123,7 +108,7 @@ export function HeroSection() {
                 <div className="absolute -bottom-4 -right-4 w-28 h-28 rounded-xl overflow-hidden border-2 border-border/40 shadow-lg rotate-6 hover:rotate-0 transition-transform duration-300">
                   <Image
                     src="/images/products/n-byte-explorer-kit-2.jpg"
-                    alt="N-Byte Explorer Kit detail"
+                    alt="N-Byte Learning Platform detail"
                     fill
                     className="object-cover"
                     sizes="112px"

@@ -23,7 +23,7 @@ const VALUES = [
     icon: Target,
     title: "Quality Assured",
     description:
-      "From curriculum alignment to hardware durability, we maintain the highest standards. Our kits are tested, trusted, and loved by 500+ schools.",
+      "From curriculum alignment to hardware durability, we maintain the highest standards. Our learning platforms are tested, trusted, and loved by 500+ schools.",
     gradient: "from-emerald-500 to-teal-500",
   },
   {

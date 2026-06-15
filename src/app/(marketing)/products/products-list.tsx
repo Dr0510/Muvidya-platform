@@ -95,7 +95,7 @@ export function ProductsList({ initialProducts }: ProductsListProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Our STEM Products"
-          subtitle="Comprehensive learning kits, modules, and accessories designed for hands-on STEM education"
+          subtitle="Comprehensive learning platforms, modules, and accessories designed for hands-on STEM education"
         />
 
         {/* Filters */}
