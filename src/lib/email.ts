@@ -17,7 +17,7 @@ export async function sendEmail({ to, subject, html, from, replyTo }: SendEmailP
       to: Array.isArray(to) ? to : [to],
       subject,
       html,
-      replyTo: replyTo || "hello@muvidya.com",
+      replyTo: replyTo || "contact@muvidya.com",
     });
 
     return { success: true, data };
@@ -114,7 +114,7 @@ export function newLeadNotificationHtml({ name, email, phone, company, source }:
       ${source ? `<tr><td style="padding: 8px 0; color: #6b7280;">Source:</td><td style="padding: 8px 0;">${source}</td></tr>` : ""}
     </table>
     <div style="margin-top: 20px;">
-      <a href="${process.env.NEXT_PUBLIC_APP_URL}/admin/leads" style="background: #6366f1; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">View in Dashboard</a>
+      <a href="${process.env.NEXT_PUBLIC_APP_URL || ''}/leads" style="background: #6366f1; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">View in Dashboard</a>
     </div>
   </div>
 </body>
@@ -136,7 +136,7 @@ export function contactAutoReplyHtml({ name }: { name: string }) {
     <p>Hi <strong>${name}</strong>,</p>
     <p>We've received your message and our team will get back to you within <strong>24 hours</strong>.</p>
     <p>If your enquiry is urgent, feel free to contact us directly:</p>
-    <p>📞 <strong>+91 98765 43210</strong><br>💬 <strong>WhatsApp:</strong> Available on our website</p>
+    <p>📞 <strong>+91 9022477635</strong><br>💬 <strong>WhatsApp:</strong> Available on our website</p>
     <p style="margin-bottom: 0;">Best regards,<br><strong>The MuVidya Team</strong></p>
   </div>
 </body>

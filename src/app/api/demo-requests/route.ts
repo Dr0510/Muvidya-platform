@@ -4,6 +4,7 @@ import { demoRequestSchema } from "@/lib/validation";
 import { rateLimit } from "@/lib/rate-limit";
 import { sendEmail, demoRequestConfirmationHtml, newLeadNotificationHtml } from "@/lib/email";
 import { headers } from "next/headers";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export async function POST(request: Request) {
   try {
@@ -66,7 +67,7 @@ export async function POST(request: Request) {
         state: data.state || null,
         gradeLevel: data.gradeLevel || null,
         subjectArea: data.subjectArea || null,
-        studentCount: data.studentCount ? parseInt(data.studentCount, 10) : null,
+        studentCount: data.studentCount && data.studentCount !== "" ? parseInt(data.studentCount, 10) : null,
         message: data.message || null,
       },
     });
@@ -83,7 +84,7 @@ export async function POST(request: Request) {
         }),
       }),
       sendEmail({
-        to: process.env.ADMIN_EMAIL || "admin@muvidya.com",
+        to: process.env.ADMIN_EMAIL || SITE_CONFIG.email,
         subject: `New Demo Request - ${data.name}`,
         html: newLeadNotificationHtml({
           name: data.name,

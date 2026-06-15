@@ -4,6 +4,7 @@ import { contactFormSchema } from "@/lib/validation";
 import { rateLimit } from "@/lib/rate-limit";
 import { sendEmail, contactAutoReplyHtml, newLeadNotificationHtml } from "@/lib/email";
 import { headers } from "next/headers";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export async function POST(request: Request) {
   try {
@@ -66,7 +67,7 @@ export async function POST(request: Request) {
         html: contactAutoReplyHtml({ name: data.name }),
       }),
       sendEmail({
-        to: process.env.ADMIN_EMAIL || "admin@muvidya.com",
+        to: process.env.ADMIN_EMAIL || SITE_CONFIG.email,
         subject: `New Enquiry: ${data.subject} - ${data.name}`,
         html: newLeadNotificationHtml({
           name: data.name,

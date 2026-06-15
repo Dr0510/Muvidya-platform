@@ -4,6 +4,7 @@ import { workshopEnquirySchema } from "@/lib/validation";
 import { rateLimit } from "@/lib/rate-limit";
 import { sendEmail, workshopEnquiryConfirmationHtml, newLeadNotificationHtml } from "@/lib/email";
 import { headers } from "next/headers";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export async function POST(request: Request) {
   try {
@@ -60,7 +61,7 @@ export async function POST(request: Request) {
         workshopType: data.workshopType || null,
         preferredDate: data.preferredDate ? new Date(data.preferredDate) : null,
         duration: data.duration || null,
-        studentCount: data.studentCount ? parseInt(data.studentCount, 10) : null,
+        studentCount: data.studentCount && data.studentCount !== "" ? parseInt(data.studentCount, 10) : null,
         gradeLevel: data.gradeLevel || null,
         schoolName: data.schoolName || null,
         city: data.city || null,
@@ -81,7 +82,7 @@ export async function POST(request: Request) {
         }),
       }),
       sendEmail({
-        to: process.env.ADMIN_EMAIL || "admin@muvidya.com",
+        to: process.env.ADMIN_EMAIL || SITE_CONFIG.email,
         subject: `New Workshop Enquiry - ${data.name}`,
         html: newLeadNotificationHtml({
           name: data.name,
