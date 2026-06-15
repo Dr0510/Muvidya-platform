@@ -251,14 +251,14 @@ body {
 
 /* ── Gradient Text — Bolder, more readable ── */
 .gradient-text {
-  background: linear-gradient(135deg, rgb(var(--color-primary-600)), rgb(var(--color-primary-800)));
+  background: linear-gradient(135deg, rgb(var(--color-primary)), rgb(91 33 182));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 [data-theme="dark"] .gradient-text {
-  background: linear-gradient(135deg, rgb(196 181 253), rgb(129 140 248));
+  background: linear-gradient(135deg, rgb(167 139 250), rgb(129 140 248));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

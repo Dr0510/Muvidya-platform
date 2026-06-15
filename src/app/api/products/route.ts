@@ -44,9 +44,15 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { userId } = await auth();
+    const { userId, sessionClaims } = await auth();
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Check admin role
+    const metadata = sessionClaims?.metadata as Record<string, unknown> | undefined;
+    if (metadata?.role !== "admin" && metadata?.role !== "superadmin") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     const body = await request.json();

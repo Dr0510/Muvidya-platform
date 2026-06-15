@@ -87,7 +87,7 @@ function DesktopNavLink({
   }, []);
 
   const handleMouseLeave = useCallback(() => {
-    timeoutRef.current = setTimeout(() => setDropdownOpen(false), 150);
+    timeoutRef.current = setTimeout(() => setDropdownOpen(false), 300);
   }, []);
 
   useEffect(() => {
@@ -239,26 +239,32 @@ function MobileNavItem({
       exit="closed"
     >
       <div className="flex flex-col">
-        <Link
-          href={item.href}
-          aria-current={isActive ? "page" : undefined}
+        <div
           className={cn(
-            "flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-semibold transition-all duration-200",
+            "flex items-center rounded-xl transition-all duration-200",
             isActive
               ? "bg-primary/10 text-primary shadow-sm"
               : "text-muted-foreground hover:bg-surface-muted/70 hover:text-foreground"
           )}
-          onClick={(e) => {
-            if (hasDropdown) {
-              e.preventDefault();
-              setExpanded(!expanded);
-            }
-          }}
         >
-          <span>{item.label}</span>
-          <span className="flex items-center gap-1.5">
-            {isActive && <span className="h-1.5 w-1.5 rounded-full bg-primary" />}
-            {hasDropdown && (
+          <Link
+            href={item.href}
+            aria-current={isActive ? "page" : undefined}
+            className={cn(
+              "flex-1 rounded-xl px-4 py-3.5 text-sm font-semibold transition-all duration-200"
+            )}
+          >
+            <span>{item.label}</span>
+          </Link>
+          {hasDropdown && (
+            <button
+              type="button"
+              onClick={() => setExpanded(!expanded)}
+              className="flex items-center justify-center h-10 w-10 mr-1 rounded-lg hover:bg-surface-muted/80 transition-colors"
+              aria-label={expanded ? `Collapse ${item.label} sub-menu` : `Expand ${item.label} sub-menu`}
+              aria-expanded={expanded}
+            >
+              {isActive && <span className="h-1.5 w-1.5 rounded-full bg-primary mr-1" />}
               <ChevronDown
                 className={cn(
                   "h-4 w-4 transition-transform duration-200",
@@ -266,9 +272,9 @@ function MobileNavItem({
                 )}
                 aria-hidden="true"
               />
-            )}
-          </span>
-        </Link>
+            </button>
+          )}
+        </div>
 
         {/* Mobile sub-items */}
         <AnimatePresence>
@@ -472,7 +478,7 @@ export function Navbar() {
           {isSignedIn ? (
             <div className="flex items-center gap-2.5 border-l border-border/60 pl-3">
               <Link
-                href="/admin/dashboard"
+                href="/dashboard"
                 className={cn(
                   "group relative inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold",
                   "text-muted-foreground transition-all duration-200",
@@ -624,7 +630,7 @@ export function Navbar() {
               <div className="px-4 py-4 flex flex-col gap-3">
                 {isSignedIn ? (
                   <Link
-                    href="/admin/dashboard"
+                    href="/dashboard"
                     onClick={() => setIsMobileOpen(false)}
                     className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 px-4 py-3.5 text-sm font-bold text-primary transition-all duration-200 hover:from-primary/15 hover:to-primary/10"
                   >

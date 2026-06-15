@@ -99,7 +99,7 @@ export function ProductDetailClient({
   return (
     <>
       {/* Product Detail */}
-      <SectionWrapper className="pt-12 pb-16 bg-white">
+      <SectionWrapper className="pt-12 pb-16 bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Image / Gallery */}
@@ -113,7 +113,7 @@ export function ProductDetailClient({
               <div
                 className={cn(
                   "relative h-80 lg:h-96 rounded-2xl overflow-hidden cursor-pointer group",
-                  productImages.length === 0 ? `bg-gradient-to-br ${gradient}` : "bg-gray-100"
+                  productImages.length === 0 ? `bg-gradient-to-br ${gradient}` : "bg-muted"
                 )}
                 onClick={() => productImages.length > 0 && openLightbox(0)}
               >
@@ -129,7 +129,7 @@ export function ProductDetailClient({
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/90 backdrop-blur-sm text-xs text-gray-700 shadow-sm">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/90 backdrop-blur-sm text-xs text-foreground shadow-sm">
                         <span className="font-medium">Click to expand</span>
                       </div>
                     </div>
@@ -185,7 +185,7 @@ export function ProductDetailClient({
                   href={product.brochureUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors w-full justify-center"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-sm font-medium text-foreground hover:bg-muted transition-colors w-full justify-center"
                 >
                   <Download className="h-4 w-4" />
                   Download Brochure
@@ -201,7 +201,7 @@ export function ProductDetailClient({
               className="space-y-6"
             >
               <div>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {product.description}
                 </p>
               </div>
@@ -213,7 +213,7 @@ export function ProductDetailClient({
                     <Badge
                       key={tag}
                       variant="secondary"
-                      className="bg-gray-50 text-gray-600 border-gray-200"
+                      className="bg-muted text-muted-foreground border-border"
                     >
                       {tag}
                     </Badge>
@@ -229,7 +229,7 @@ export function ProductDetailClient({
                     product.inStock ? "bg-green-500" : "bg-red-500"
                   )}
                 />
-                <span className="text-sm font-medium text-gray-700">
+                <span className="text-sm font-medium text-foreground">
                   {product.inStock ? "In Stock" : "Out of Stock"}
                 </span>
               </div>
@@ -260,13 +260,13 @@ export function ProductDetailClient({
                   return (
                     <div
                       key={perk.title}
-                      className="text-center p-3 rounded-xl bg-gray-50 border border-gray-100"
+                      className="text-center p-3 rounded-xl bg-muted border border-border"
                     >
                       <Icon className="h-5 w-5 text-primary-500 mx-auto mb-1" />
-                      <p className="text-xs font-semibold text-gray-900">
+                      <p className="text-xs font-semibold text-foreground">
                         {perk.title}
                       </p>
-                      <p className="text-[10px] text-gray-500 mt-0.5">
+                      <p className="text-[10px] text-muted-foreground mt-0.5">
                         {perk.description}
                       </p>
                     </div>
@@ -279,7 +279,7 @@ export function ProductDetailClient({
           {/* Tabs */}
           {(features.length > 0 || specs.length > 0) && (
             <div className="mt-16">
-              <div className="flex gap-1 border-b border-gray-200">
+              <div className="flex gap-1 border-b border-border">
                 {features.length > 0 && (
                   <button
                     onClick={() => setActiveTab("features")}
@@ -287,7 +287,7 @@ export function ProductDetailClient({
                       "px-6 py-3 text-sm font-medium transition-colors relative",
                       activeTab === "features"
                         ? "text-primary-600"
-                        : "text-gray-500 hover:text-gray-700"
+                        : "text-muted-foreground hover:text-foreground"
                     )}
                   >
                     Features
@@ -306,7 +306,7 @@ export function ProductDetailClient({
                       "px-6 py-3 text-sm font-medium transition-colors relative",
                       activeTab === "specs"
                         ? "text-primary-600"
-                        : "text-gray-500 hover:text-gray-700"
+                        : "text-muted-foreground hover:text-foreground"
                     )}
                   >
                     Specifications
@@ -326,28 +326,28 @@ export function ProductDetailClient({
                     {features.map((feature) => (
                       <div
                         key={feature}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100"
+                        className="flex items-center gap-3 p-3 rounded-xl bg-muted border border-border"
                       >
                         <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0" />
-                        <span className="text-sm text-gray-700">{feature}</span>
+                        <span className="text-sm text-foreground">{feature}</span>
                       </div>
                     ))}
                   </div>
                 )}
                 {activeTab === "specs" && specs.length > 0 && (
-                  <div className="border border-gray-200 rounded-xl overflow-hidden">
+                  <div className="border border-border rounded-xl overflow-hidden">
                     {specs.map(([key, value], idx) => (
                       <div
                         key={key}
                         className={cn(
                           "flex items-center justify-between px-6 py-3 text-sm",
-                          idx % 2 === 0 ? "bg-gray-50" : "bg-white"
+                          idx % 2 === 0 ? "bg-muted" : "bg-background"
                         )}
                       >
-                        <span className="font-medium text-gray-900 capitalize">
+                        <span className="font-medium text-foreground capitalize">
                           {key.replace(/_/g, " ")}
                         </span>
-                        <span className="text-gray-600">{value}</span>
+                        <span className="text-muted-foreground">{value}</span>
                       </div>
                     ))}
                   </div>
@@ -424,7 +424,6 @@ export function ProductDetailClient({
               />
             </motion.div>
 
-            {/* Image counter */}
             {productImages.length > 1 && (
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm">
                 {lightboxIndex + 1} / {productImages.length}
@@ -436,13 +435,13 @@ export function ProductDetailClient({
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (
-        <SectionWrapper className="py-16 bg-gray-50/50">
+        <SectionWrapper className="py-16 bg-muted/50">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
-              <h2 className="text-2xl font-bold text-gray-900">
+              <h2 className="text-2xl font-bold text-foreground">
                 Related Products
               </h2>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-muted-foreground mt-1">
                 Explore more products in this category
               </p>
             </div>

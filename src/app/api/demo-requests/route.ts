@@ -108,14 +108,34 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const demoRequests = await prisma.demoRequest.findMany({
-      include: { lead: true },
-      orderBy: { createdAt: "desc" },
+    const { searchParams } = new URL(request.url);
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
+    const limit = Math.min(100, Math.max(1, parseInt(searchParams.get("limit") || "50")));
+    const skip = (page - 1) * limit;
+
+    const [demoRequests, total] = await Promise.all([
+      prisma.demoRequest.findMany({
+        include: { lead: true },
+        orderBy: { createdAt: "desc" },
+        skip,
+        take: limit,
+      }),
+      prisma.demoRequest.count(),
+    ]);
+
+    return NextResponse.json({
+      data: demoRequests,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+      },
     });
-    return NextResponse.json({ data: demoRequests });
   } catch (error) {
+    console.error("Demo requests fetch error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

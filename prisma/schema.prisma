@@ -24,6 +24,11 @@ model Lead {
   demoRequests      DemoRequest[]
   workshopRequests  WorkshopRequest[]
   enquiries         Enquiry[]
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([email])
+  @@index([status, createdAt])
 }
 
 model DemoRequest {
@@ -42,6 +47,9 @@ model DemoRequest {
   status        String   @default("DEMO")
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
+  @@index([leadId])
+  @@index([createdAt])
 }
 
 model WorkshopRequest {
@@ -60,6 +68,9 @@ model WorkshopRequest {
   status        String   @default("WORKSHOP")
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
+  @@index([leadId])
+  @@index([createdAt])
 }
 
 model Enquiry {
@@ -71,6 +82,9 @@ model Enquiry {
   status    String   @default("ENQUIRY")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([leadId])
+  @@index([createdAt])
 }
 
 model Product {
@@ -91,6 +105,10 @@ model Product {
   tags           String[]
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+
+  @@index([category])
+  @@index([isFeatured])
+  @@index([createdAt])
 }
 
 model Workshop {

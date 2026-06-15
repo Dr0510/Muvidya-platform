@@ -106,14 +106,34 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const workshopRequests = await prisma.workshopRequest.findMany({
-      include: { lead: true },
-      orderBy: { createdAt: "desc" },
+    const { searchParams } = new URL(request.url);
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
+    const limit = Math.min(100, Math.max(1, parseInt(searchParams.get("limit") || "50")));
+    const skip = (page - 1) * limit;
+
+    const [workshopRequests, total] = await Promise.all([
+      prisma.workshopRequest.findMany({
+        include: { lead: true },
+        orderBy: { createdAt: "desc" },
+        skip,
+        take: limit,
+      }),
+      prisma.workshopRequest.count(),
+    ]);
+
+    return NextResponse.json({
+      data: workshopRequests,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+      },
     });
-    return NextResponse.json({ data: workshopRequests });
   } catch (error) {
+    console.error("Workshop requests fetch error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

@@ -10,7 +10,7 @@ export const leadFormSchema = z.object({
     .email("Please enter a valid email address"),
   phone: z
     .string()
-    .regex(/^[+]?[\d\s()-]{10,15}$/, "Please enter a valid phone number")
+    .regex(/^\+?[\d\s()-]{7,15}$/, "Please enter a valid phone number")
     .optional()
     .or(z.literal("")),
   company: z
@@ -35,7 +35,7 @@ const studentCountField = z.string().optional().or(z.literal(""));
 export const demoRequestSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
   email: z.string().email("Please enter a valid email address"),
-  phone: z.string().regex(/^[+]?[\d\s()-]{10,15}$/, "Please enter a valid phone number"),
+  phone: z.string().regex(/^\+?[\d\s()-]{7,15}$/, "Please enter a valid phone number"),
   schoolName: z.string().min(2, "School name is required").max(200),
   city: z.string().min(2, "City is required").max(100),
   state: z.string().min(2, "State is required").max(100),
@@ -50,7 +50,7 @@ export const demoRequestSchema = z.object({
 export const workshopEnquirySchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
   email: z.string().email("Please enter a valid email address"),
-  phone: z.string().regex(/^[+]?[\d\s()-]{10,15}$/, "Please enter a valid phone number"),
+  phone: z.string().regex(/^\+?[\d\s()-]{7,15}$/, "Please enter a valid phone number"),
   schoolName: z.string().min(2, "School name is required").max(200),
   city: z.string().min(2, "City is required").max(100),
   state: z.string().min(2, "State is required").max(100),
@@ -67,7 +67,7 @@ export const contactFormSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   phone: z
     .string()
-    .regex(/^[+]?[\d\s()-]{10,15}$/, "Please enter a valid phone number")
+    .regex(/^\+?[\d\s()-]{7,15}$/, "Please enter a valid phone number")
     .optional()
     .or(z.literal("")),
   subject: z.string().min(2, "Subject is required").max(200),

@@ -49,12 +49,12 @@ export default function LeadsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Leads</h1>
-          <p className="text-sm text-gray-500 mt-1">Manage and track all your leads</p>
+          <h1 className="text-2xl font-bold text-foreground">Leads</h1>
+          <p className="text-sm text-muted-foreground mt-1">Manage and track all your leads</p>
         </div>
         <button
           onClick={exportCSV}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary-50 text-primary-700 text-sm font-semibold hover:bg-primary-100 transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/10 text-primary-700 text-sm font-semibold hover:bg-primary/15 transition-colors"
         >
           <Download className="h-4 w-4" />
           Export CSV
@@ -65,7 +65,7 @@ export default function LeadsPage() {
         <CardHeader>
           <div className="flex items-center gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search leads by name, email, or school..."
                 value={search}
@@ -86,35 +86,35 @@ export default function LeadsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-gray-100">
-                    <th className="text-left py-3 px-2 font-semibold text-gray-600">Name</th>
-                    <th className="text-left py-3 px-2 font-semibold text-gray-600">Email</th>
-                    <th className="text-left py-3 px-2 font-semibold text-gray-600">School</th>
-                    <th className="text-left py-3 px-2 font-semibold text-gray-600">Source</th>
-                    <th className="text-left py-3 px-2 font-semibold text-gray-600">Status</th>
-                    <th className="text-left py-3 px-2 font-semibold text-gray-600">Date</th>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-3 px-2 font-semibold text-muted-foreground">Name</th>
+                    <th className="text-left py-3 px-2 font-semibold text-muted-foreground">Email</th>
+                    <th className="text-left py-3 px-2 font-semibold text-muted-foreground">School</th>
+                    <th className="text-left py-3 px-2 font-semibold text-muted-foreground">Source</th>
+                    <th className="text-left py-3 px-2 font-semibold text-muted-foreground">Status</th>
+                    <th className="text-left py-3 px-2 font-semibold text-muted-foreground">Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   {leads.map((lead: any) => (
-                    <tr key={lead.id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
-                      <td className="py-3 px-2 font-medium text-gray-900">{lead.name}</td>
-                      <td className="py-3 px-2 text-gray-600">{lead.email}</td>
-                      <td className="py-3 px-2 text-gray-600">{lead.company || "-"}</td>
-                      <td className="py-3 px-2 text-gray-600">{lead.source || "website"}</td>
+                    <tr key={lead.id} className="border-b border-border/50 hover:bg-muted/30 transition-colors">
+                      <td className="py-3 px-2 font-medium text-foreground">{lead.name}</td>
+                      <td className="py-3 px-2 text-muted-foreground">{lead.email}</td>
+                      <td className="py-3 px-2 text-muted-foreground">{lead.company || "-"}</td>
+                      <td className="py-3 px-2 text-muted-foreground">{lead.source || "website"}</td>
                       <td className="py-3 px-2">
                         <Badge variant="default" className={LEAD_STATUS_COLORS[lead.status] || ""}>
                           {LEAD_STATUS_LABELS[lead.status] || lead.status}
                         </Badge>
                       </td>
-                      <td className="py-3 px-2 text-gray-500 text-xs">
+                      <td className="py-3 px-2 text-muted-foreground text-xs">
                         {format(new Date(lead.createdAt), "MMM d, yyyy")}
                       </td>
                     </tr>
                   ))}
                   {leads.length === 0 && (
                     <tr>
-                      <td colSpan={6} className="text-center py-12 text-gray-500">No leads found</td>
+                      <td colSpan={6} className="text-center py-12 text-muted-foreground">No leads found</td>
                     </tr>
                   )}
                 </tbody>

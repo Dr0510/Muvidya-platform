@@ -29,9 +29,14 @@ export async function PATCH(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const { userId } = await auth();
+    const { userId, sessionClaims } = await auth();
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const metadata = sessionClaims?.metadata as Record<string, unknown> | undefined;
+    if (metadata?.role !== "admin" && metadata?.role !== "superadmin") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     const { slug } = await params;
@@ -77,9 +82,14 @@ export async function DELETE(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
-    const { userId } = await auth();
+    const { userId, sessionClaims } = await auth();
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const metadata = sessionClaims?.metadata as Record<string, unknown> | undefined;
+    if (metadata?.role !== "admin" && metadata?.role !== "superadmin") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     const { slug } = await params;

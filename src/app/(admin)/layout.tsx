@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
@@ -18,17 +18,29 @@ import {
 } from "lucide-react";
 
 const sidebarItems = [
-  { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
+  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "Products", href: "/admin/products", icon: Package },
-  { label: "Leads", href: "/admin/leads", icon: Users },
-  { label: "Demo Requests", href: "/admin/demo-requests", icon: CalendarCheck },
-  { label: "Workshop Requests", href: "/admin/workshop-requests", icon: Wrench },
-  { label: "Enquiries", href: "/admin/enquiries", icon: MessageSquare },
+  { label: "Leads", href: "/leads", icon: Users },
+  { label: "Demo Requests", href: "/demo-requests", icon: CalendarCheck },
+  { label: "Workshop Requests", href: "/workshop-requests", icon: Wrench },
+  { label: "Enquiries", href: "/enquiries", icon: MessageSquare },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const pathname = usePathname();
+
+  // Auto-collapse sidebar on small screens
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setSidebarOpen(false);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -41,7 +53,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       >
         <div className="flex items-center justify-between h-16 px-4 border-b border-border/60">
           {sidebarOpen && (
-            <Link href="/admin/dashboard" className="flex items-center gap-2">
+            <Link href="/dashboard" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
                 <Sparkles className="h-4 w-4 text-white" />
               </div>

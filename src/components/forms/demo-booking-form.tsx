@@ -66,8 +66,9 @@ export function DemoBookingForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1.5">Full Name *</label>
+          <label htmlFor="demo-name" className="block text-sm font-medium text-foreground/80 mb-1.5">Full Name *</label>
           <input
+            id="demo-name"
             {...register("name")}
             placeholder="Your full name"
             className={cn(
@@ -79,8 +80,9 @@ export function DemoBookingForm() {
           {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1.5">Email Address *</label>
+          <label htmlFor="demo-email" className="block text-sm font-medium text-foreground/80 mb-1.5">Email Address *</label>
           <input
+            id="demo-email"
             {...register("email")}
             type="email"
             placeholder="your@email.com"
@@ -96,8 +98,9 @@ export function DemoBookingForm() {
 
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1.5">Phone Number *</label>
+          <label htmlFor="demo-phone" className="block text-sm font-medium text-foreground/80 mb-1.5">Phone Number *</label>
           <input
+            id="demo-phone"
             {...register("phone")}
             type="tel"
             placeholder="+91 98765 43210"
@@ -110,8 +113,9 @@ export function DemoBookingForm() {
           {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone.message}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1.5">School Name *</label>
+          <label htmlFor="demo-school" className="block text-sm font-medium text-foreground/80 mb-1.5">School Name *</label>
           <input
+            id="demo-school"
             {...register("schoolName")}
             placeholder="Name of your school"
             className={cn(
@@ -126,8 +130,9 @@ export function DemoBookingForm() {
 
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1.5">City *</label>
+          <label htmlFor="demo-city" className="block text-sm font-medium text-foreground/80 mb-1.5">City *</label>
           <input
+            id="demo-city"
             {...register("city")}
             placeholder="City"
             className={cn(
@@ -139,8 +144,9 @@ export function DemoBookingForm() {
           {errors.city && <p className="text-xs text-destructive mt-1">{errors.city.message}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-foreground/80 mb-1.5">State *</label>
+          <label htmlFor="demo-state" className="block text-sm font-medium text-foreground/80 mb-1.5">State *</label>
           <input
+            id="demo-state"
             {...register("state")}
             placeholder="State"
             className={cn(
@@ -150,6 +156,26 @@ export function DemoBookingForm() {
             )}
           />
           {errors.state && <p className="text-xs text-destructive mt-1">{errors.state.message}</p>}
+        </div>
+      </div>
+
+      <div className="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label className="block text-sm font-medium text-foreground/80 mb-1.5">Preferred Date</label>
+          <input
+            {...register("preferredDate")}
+            type="date"
+            className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-foreground/80 mb-1.5">Preferred Time</label>
+          <select {...register("preferredTime")} className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+            <option value="">Select time</option>
+            <option value="morning">Morning (9 AM - 12 PM)</option>
+            <option value="afternoon">Afternoon (12 PM - 3 PM)</option>
+            <option value="evening">Evening (3 PM - 6 PM)</option>
+          </select>
         </div>
       </div>
 
