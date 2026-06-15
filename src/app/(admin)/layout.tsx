@@ -15,15 +15,21 @@ import {
   ChevronLeft,
   Menu,
   Sparkles,
+  Star,
+  FolderKanban,
+  BarChart3,
 } from "lucide-react";
 
 const sidebarItems = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Analytics", href: "/analytics", icon: BarChart3 },
   { label: "Products", href: "/admin/products", icon: Package },
   { label: "Leads", href: "/leads", icon: Users },
   { label: "Demo Requests", href: "/demo-requests", icon: CalendarCheck },
   { label: "Workshop Requests", href: "/workshop-requests", icon: Wrench },
   { label: "Enquiries", href: "/enquiries", icon: MessageSquare },
+  { label: "Testimonials", href: "/testimonials", icon: Star },
+  { label: "Projects", href: "/admin/projects", icon: FolderKanban },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

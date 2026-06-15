@@ -152,3 +152,41 @@ model NewsletterSubscriber {
   subscribedAt   DateTime  @default(now())
   unsubscribedAt DateTime?
 }
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  name        String
+  role        String?
+  school      String?
+  content     String
+  rating      Int      @default(5)
+  image       String?
+  videoUrl    String?
+  type        String   @default("text") // "text" | "video"
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isActive, sortOrder])
+}
+
+model Project {
+  id             String   @id @default(cuid())
+  title          String
+  slug           String   @unique
+  description    String
+  shortDesc      String?
+  image          String?
+  difficulty     String   @default("beginner") // "beginner" | "intermediate" | "advanced"
+  skills         String[]
+  gradeLevel     String?
+  category       String?
+  isActive       Boolean  @default(true)
+  sortOrder      Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([isActive, sortOrder])
+  @@index([category])
+}
