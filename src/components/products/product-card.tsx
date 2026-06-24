@@ -42,7 +42,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
       transition={{ delay: index * 0.1, duration: 0.5 }}
     >
       <Card className="group h-full overflow-hidden hover:shadow-elevation-high transition-all duration-300">
-        <div className={`relative h-48 overflow-hidden ${!imageSrc ? `bg-gradient-to-br ${gradient}` : "bg-muted"}`}>
+        <div className={`relative h-64 overflow-hidden ${!imageSrc ? `bg-gradient-to-br ${gradient}` : "bg-muted"}`}>
           {imageSrc ? (
             <Image
               src={imageSrc}

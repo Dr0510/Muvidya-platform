@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
   name: "MμVidya",
-  tagline: "Learn by Building",
+  tagline: "Empowering Students with Real-World STEM Skills",
   description:
     "MμVidya offers cutting-edge STEM education learning platforms, robotics workshops, and hands-on learning experiences for schools and students across India. Empowering the next generation of innovators.",
   url: process.env.NEXT_PUBLIC_APP_URL || "https://muvidya.com",
@@ -240,24 +240,24 @@ export const STUDENT_BENEFITS = [
     icon: "Rocket",
   },
   {
-    title: "Certification",
-    description: "Earn certificates upon completing workshops and courses, recognized by leading educational institutions.",
-    icon: "Award",
-  },
-  {
-    title: "Online Community",
-    description: "Join our community of young innovators. Share projects, participate in challenges, and win prizes.",
-    icon: "Users",
-  },
-  {
     title: "Project Portfolio",
     description: "Build an impressive portfolio of STEM projects for school admissions and competitions.",
     icon: "FolderOpen",
   },
   {
+    title: "Certification",
+    description: "Earn certificates upon completing workshops and courses, recognized by leading educational institutions.",
+    icon: "Award",
+  },
+  {
     title: "Mentorship",
     description: "Get guidance from industry professionals and STEM experts through our mentorship program.",
     icon: "MessagesSquare",
+  },
+  {
+    title: "Online Community",
+    description: "Join our community of young innovators. Share projects, participate in challenges, and win prizes.",
+    icon: "Users",
   },
 ];
 
@@ -277,7 +277,7 @@ export const LEARNING_OUTCOMES = [
     bgColor: "bg-amber-50",
   },
   {
-    title: "Creativity & Innovation",
+    title: "Meet Innovation",
     description: "Design and build original projects that solve meaningful problems",
     icon: "Palette",
     color: "text-rose-500",

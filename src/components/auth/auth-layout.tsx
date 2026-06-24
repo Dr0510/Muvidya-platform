@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Sparkles } from "lucide-react";
+import Image from "next/image";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -28,13 +28,21 @@ export function AuthLayout({ children, title, subtitle, altLink }: AuthLayoutPro
       >
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 group">
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shadow-lg shadow-primary-500/25">
-              <Sparkles className="h-5 w-5 text-white" />
+          <Link href="/" className="inline-flex items-center gap-2.5 group">
+            <div className="relative h-12 w-12 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary to-primary-600 opacity-15" />
+              <Image
+                src="/images/brand/muvidya-logo.png"
+                alt="MμVidya logo"
+                width={48}
+                height={48}
+                className="relative h-9 w-9 object-contain"
+                priority
+              />
             </div>
             <div className="flex flex-col items-start">
-              <span className="text-xl font-bold text-foreground">MuVidya</span>
-              <span className="text-[10px] font-medium tracking-wider text-muted-foreground">
+              <span className="text-xl font-bold text-foreground">MμVidya</span>
+              <span className="text-[11px] font-medium tracking-wider text-muted-foreground">
                 Where Young Minds Build the Future
               </span>
             </div>

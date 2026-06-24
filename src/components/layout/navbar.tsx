@@ -438,19 +438,19 @@ export function Navbar() {
           aria-label={`${SITE_CONFIG.name} home`}
         >
           {/* Logo image */}
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center">
+          <div className="relative flex h-14 w-14 shrink-0 items-center justify-center">
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary to-primary-600 opacity-15" />
             <Image
               src="/images/brand/muvidya-logo.png"
               alt={`${SITE_CONFIG.name} logo`}
-              width={36}
-              height={36}
-              className="relative h-8 w-8 object-contain"
+              width={56}
+              height={56}
+              className="relative h-10 w-10 object-contain"
               priority
             />
           </div>
           <div className="min-w-0 flex flex-col">
-            <span className="truncate text-sm font-bold tracking-tight text-foreground sm:text-base">
+            <span className="truncate text-base font-bold tracking-tight text-foreground sm:text-lg">
               {SITE_CONFIG.name}
             </span>
           </div>
@@ -585,14 +585,14 @@ export function Navbar() {
                   onClick={() => setIsMobileOpen(false)}
                   aria-label={`${SITE_CONFIG.name} home`}
                 >
-                  <div className="relative flex h-8 w-8 items-center justify-center">
+                  <div className="relative flex h-12 w-12 shrink-0 items-center justify-center">
                     <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary to-primary-600 opacity-15" />
                     <Image
                       src="/images/brand/muvidya-logo.png"
                       alt={`${SITE_CONFIG.name} logo`}
-                      width={28}
-                      height={28}
-                      className="relative h-6 w-6 object-contain"
+                      width={48}
+                      height={48}
+                      className="relative h-9 w-9 object-contain"
                     />
                   </div>
                   <span className="text-sm font-bold tracking-tight text-foreground">

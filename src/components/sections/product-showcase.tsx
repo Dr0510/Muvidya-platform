@@ -53,7 +53,7 @@ export function ProductShowcase() {
     <SectionWrapper className="bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          title="Everything You Need for STEM Education"
+          title="Empowering Students with Real-World STEM Skills"
           subtitle="Comprehensive products and programs designed to inspire the next generation of innovators"
           badge="What We Offer"
         />

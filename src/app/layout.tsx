@@ -9,11 +9,11 @@ const themeInitScript = `
     try {
       var storedTheme = localStorage.getItem('muvidya-theme');
       var theme = storedTheme === 'dark' || storedTheme === 'light'
-        ? storedTheme
-        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+       ? storedTheme
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches? 'dark' : 'light');
       document.documentElement.dataset.theme = theme;
       window.__INITIAL_THEME__ = storedTheme === 'dark' || storedTheme === 'light' || storedTheme === 'system'
-        ? storedTheme
+       ? storedTheme
         : 'system';
     } catch (error) {
       document.documentElement.dataset.theme = 'light';
@@ -83,6 +83,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/favicons/favicon-16x16.png" sizes="16x16" />
+        <link rel="icon" href="/favicons/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" href="/favicons/favicon-48x48.png" sizes="48x48" />
+        <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" sizes="180x180" />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         {process.env.NEXT_PUBLIC_GTM_ID && (
           <script
